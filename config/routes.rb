@@ -1,19 +1,21 @@
 Rails.application.routes.draw do
+  #routing for users module
   devise_for :users
+  #routing for home page
   get 'pages/home'
-
+  #routing for about page
   get 'pages/about'
-
+  #routing for contact page
   get 'pages/contact'
-
-  get 'pages/careers'
-
+  #routing for careers page
+  get 'pages/careers' 
+  #routing for legalinfo page
   get 'pages/legalinfo'
-
+  #routing for aimesays page
   get 'pages/aimesays'
-
   #routing for index page
   root 'pages#home'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
