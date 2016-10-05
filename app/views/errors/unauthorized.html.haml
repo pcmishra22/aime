@@ -1,0 +1,9 @@
+%div.not_found
+  %div.container
+    %div.content
+      = image_tag('flat16.png', :width=> 350, :height => 350);
+      %h6.wow.animated.fadeInUp Unauthorized (401)
+      %p.wow.animated.fadeInUp{'data-wow-duration':'300ms'}
+        You do not have permissions to access this page
+        %br
+        =link_to 'Go to our homepage', root_path
