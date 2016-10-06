@@ -1,0 +1,24 @@
+!!!
+%html
+  %head
+
+    %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
+    %title= content_for?(:title) ? yield(:title) : 'Aime'
+    %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'AIME'}"}
+
+
+    = stylesheet_link_tag 'application', media: 'all'
+    = favicon_link_tag 'favicon.ico'
+
+    = csrf_meta_tags
+    = yield :custom_heads
+  %body
+
+
+.container-narrow
+  .masthead
+    = render 'layouts/user_header'
+    %h3.muted= link_to "Student", root_path
+    %h5.muted Simple login, Signup, and Logout
+    .hr
+    = yield
