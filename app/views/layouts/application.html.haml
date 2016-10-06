@@ -15,10 +15,13 @@
   %body
 
 
-.container-narrow
-  .masthead
-    = render 'layouts/user_header'
-    %h3.muted= link_to "Home", root_path
-    %h5.muted Simple login, Signup, and Logout
-    .hr
-    = yield
+    .container-narrow
+      .masthead
+        = render 'layouts/user_header'
+        %h3.muted= link_to "Home", root_path
+        %h5.muted Simple login, Signup, and Logout
+        .hr
+        = yield
+
+    = javascript_include_tag 'application'
+    = yield :custom_javascripts

@@ -1,7 +1,7 @@
 class Student::ApplicationController < ApplicationController
   layout 'student'
 
-  before_action :verify_user_auth!
+  before_action :authenticate_user!
   before_action :authorize_student!
   before_action :set_active_menu
 
@@ -14,6 +14,9 @@ class Student::ApplicationController < ApplicationController
   private
 
   def authorize_student!
+    puts "======="
+    puts current_user.type
+    puts "======"
     render "errors/unauthorized", status: 401, layout: false unless current_user.is_student?
   end
 

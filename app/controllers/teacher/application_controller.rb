@@ -1,8 +1,8 @@
-class Student::ApplicationController < ApplicationController
+class Teacher::ApplicationController < ApplicationController
   layout 'teacher'
 
-  before_action :verify_user_auth!
-  before_action :authorize_student!
+  before_action :authenticate_user!
+  before_action :authorize_teacher!
   before_action :set_active_menu
 
   # Override this value to specify the number of elements to display at a time
@@ -13,7 +13,7 @@ class Student::ApplicationController < ApplicationController
 
   private
 
-  def authorize_student!
+  def authorize_teacher!
     render "errors/unauthorized", status: 401, layout: false unless current_user.is_teacher?
   end
 

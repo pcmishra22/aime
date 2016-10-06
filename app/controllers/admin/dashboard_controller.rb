@@ -1,5 +1,5 @@
-class Student::DashboardController < Student::ApplicationController
-  layout 'student'
+class Admin::DashboardController < Admin::ApplicationController
+  layout 'admin'
 
   def index
 

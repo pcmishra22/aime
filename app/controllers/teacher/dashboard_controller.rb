@@ -1,4 +1,4 @@
-class Student::DashboardController < Student::ApplicationController
+class Teacher::DashboardController < Teacher::ApplicationController
   layout 'teacher'
 
   def index
