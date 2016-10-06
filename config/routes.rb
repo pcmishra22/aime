@@ -5,20 +5,20 @@ Rails.application.routes.draw do
   devise_for :users
 
   namespace :student do
-    root controller: :dashboard, action: :index
+    resources :dashboard
   end
 
 
   namespace :teacher do
-    root controller: :dashboard, action: :index
+    resources :dashboard
   end
 
   namespace :parents do
-    root controller: :dashboard, action: :index
+    resources :dashboard
   end
 
   namespace :admin do
-    root controller: :dashboard, action: :index
+    resources :dashboard
   end
 
 
