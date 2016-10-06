@@ -1,5 +1,5 @@
-class Parents::ApplicationController < ApplicationController
-  layout 'parents'
+class Parent::ApplicationController < ApplicationController
+  layout 'parent'
 
   before_action :authenticate_user!
   before_action :authorize_parents!
@@ -18,7 +18,7 @@ class Parents::ApplicationController < ApplicationController
   end
 
   def set_active_menu
-    @active_menu = params[:controller].gsub('parents/','')
+    @active_menu = params[:controller].gsub('parent/','')
   end
 
  end
