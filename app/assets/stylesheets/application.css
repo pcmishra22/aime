@@ -16,6 +16,7 @@
 
 body {
     background-color: #3A3A3A;
+    color: #F7F7F7;
 }
 
 .container {
@@ -24,9 +25,9 @@ body {
     padding: 0;
 }
 .body-wrpper{
-    min-height: 500px;
     padding-left: 10px;
     padding-right: 10px;
+    padding-bottom: 10px;
 }
 .masthead{
     padding-top: 10px;
@@ -35,10 +36,10 @@ body {
 }
 
 .footer-bottom {
-    background: #E3E3E3;
-    border-top: 1px solid #DDDDDD;
     padding-top: 10px;
-    padding-bottom: 10px;
+    padding-bottom: 5px;
+    background-color: #191919;
+    padding-left: 10px;
 }
 .footer-bottom p.pull-left {
     padding-top: 6px;
