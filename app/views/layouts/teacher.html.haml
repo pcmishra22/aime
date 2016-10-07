@@ -13,11 +13,9 @@
     = csrf_meta_tags
     = yield :custom_heads
   %body
-
-
     .container
       .masthead
-        = render 'layouts/user_header'
+        = render 'layouts/teacher_header'
         %div= link_to image_tag( 'logo.png', width: 150), root_path
       .body-wrapper
         = yield
