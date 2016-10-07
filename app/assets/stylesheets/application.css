@@ -15,56 +15,31 @@
  */
 
 body {
+    background-color: #3A3A3A;
+}
+
+.container {
+    width: 970px;
+    background-color: black;
+    padding: 0;
+}
+.body-wrpper{
+    min-height: 500px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.masthead{
     padding-top: 10px;
-    padding-bottom: 40px;
+    background-color: #191919;
+    height: 60px;
 }
 
-/* Custom container */
-.container-narrow {
-    margin: 0 auto;
-    max-width: 700px;
+.footer-bottom {
+    background: #E3E3E3;
+    border-top: 1px solid #DDDDDD;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
-
-.container-narrow > hr {
-    margin: 30px 0;
-}
-
-.jumbotron {
-    margin: 60px 0;
-    text-align: center;
-}
-.jumbotron h1 {
-    font-size: 52px;
-    line-height: 1;
-}
-.jumbotron .btn {
-    font-size: 21px;
-    padding: 14px 24px;
-}
-
-/* User sign in and sign forms. */
-.border-form-div {
-    max-width: 300px;
-    padding: 19px 29px 29px;
-    margin: 0 auto 20px;
-    background-color: #fff;
-    border: 1px solid #e5e5e5;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
-    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
-    box-shadow: 0 1px 2px rgba(0,0,0,.05);
-}
-.border-form-div .form-signin-heading,
-.border-form-div .checkbox {
-    margin-bottom: 10px;
-}
-.border-form-div input[type="text"],
-.border-form-div input[type="email"],
-.border-form-div input[type="password"] {
-    font-size: 16px;
-    height: auto;
-    margin-bottom: 15px;
-    padding: 7px 9px;
+.footer-bottom p.pull-left {
+    padding-top: 6px;
 }
