@@ -2,8 +2,17 @@ class UsersController < ApplicationController
   def new
   	@user = User.new
   end
-  def create  	
+  def create  
+  	@type = params[:user][:type]	
   	@user = User.new(user_param)
+  	if(@type == 'Teacher')
+		@user.type = 'Teacher'
+	elsif(@type == 'Parent')
+		@user.type = 'Parent'
+	else
+		@user.type = 'Student'
+	end
+
 	if @user.save
 	  redirect_to '/users/sign_in'
 	else	 
