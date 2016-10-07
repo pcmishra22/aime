@@ -6,6 +6,13 @@ class User < ActiveRecord::Base
 
 
 
+  validates_confirmation_of :password
+  validates :first_name, :presence => true
+  validates :last_name, :presence => true
+  validates :email, :presence => true, :uniqueness => true
+  validates :password, :confirmation => true ,:presence => true
+  validates_length_of :password, :in => 6..20, :on => :create
+
   def is_student?
     type == "Student"
   end
