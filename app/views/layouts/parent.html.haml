@@ -15,13 +15,12 @@
   %body
 
 
-    .container-narrow
+    .container
       .masthead
         = render 'layouts/user_header'
-        %h3.muted= link_to "Parents", root_path
-        %h5.muted Simple login, Signup, and Logout
-        .hr
+        %div= link_to image_tag( 'logo.png', width: 150), root_path
+      .body-wrapper
         = yield
-
+      = render 'layouts/footer'
     = javascript_include_tag 'application'
     = yield :custom_javascripts
