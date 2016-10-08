@@ -80,3 +80,6 @@ body {
     border-color: #438bd7;
     color: #fff;
 }
+.uppercase{
+    text-transform:uppercase;
+}

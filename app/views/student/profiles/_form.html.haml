@@ -1,0 +1,80 @@
+.container.profile-main
+= simple_form_for(@student ,:url=> url_for(:action=>"update",:controller=>"profiles")) do |f|
+	= f.error_notification
+
+	.row
+		.col-lg-12 
+			.profile-top
+				.col-md-3.profile-pic
+				.col-md-8.profile-info.form-group 
+					.profile-text #{ @student.first_name } #{ @student.last_name }
+					.form-inputs 
+						=f.input :first_name,:label=>false,:placeholder=>"First Name",input_html:{:value=>@student.first_name,:class=>'profile-fields profile-input field hide'}
+						=f.input :last_name,:label=>false,:placeholder=>"Last Name",input_html:{:value=>@student.last_name,:class=>'profile-fields profile-input field hide'}
+				.col-md-1
+					.edit-profile.profile-text Edit
+					.cancel-profile.profile-input.hide Cancel
+
+	.row
+		.col-lg-12
+			.col-md-6
+				%h4{:class=>'page-header'} User Info
+				.uppercase
+					.col-lg-12.profile-fields
+						.col-md-5
+							Birthday
+						.col-md-7.form-group	
+							.profile-text #{ (@student.dob) ? @student.dob : '--'}
+							.form-inputs
+								=f.input :dob,:label=>false,as: :string,:placeholder=>"Birth date",input_html:{:value=>@student.dob,:class=>'form-control profile-input field hide',:type=>'date'}
+					.col-lg-12.profile-fields
+						.col-md-5
+							Languages
+						.col-md-7.form-group	
+							.profile-text #{ (@student.languages) ? @student.languages : '--'}
+							.form-inputs
+								=f.input :languages,:label=>false,:placeholder=>"Langauges",input_html:{:value=>@student.languages,:class=>'form-control profile-input field hide'}
+					.col-lg-12.profile-fields
+						.col-md-5
+							Activities
+						.col-md-7.form-group	
+							.profile-text #{ (@student.activities) ? @student.activities : '--'}
+							.form-inputs
+								=f.input :activities,:label=>false,:placeholder=>"Activities",input_html:{:value=>@student.activities,:class=>'form-control profile-input field hide'}
+					.col-lg-12.profile-fields
+						.col-md-5
+							Videos
+						.col-md-7.form-group	
+							.profile-text #{ (@student.videos) ? @student.videos : '--'}
+							.form-inputs
+								=f.input :videos,:label=>false,:placeholder=>"Videos",input_html:{:value=>@student.videos,:class=>'form-control profile-input field hide'}
+					.col-lg-12.profile-fields
+						.col-md-5
+							Favourite Class
+						.col-md-7.form-group	
+							.profile-text #{ (@student.favourite_class) ? @student.favourite_class : '--'}
+							.form-inputs
+								= f.input :favourite_class,:collection => {"Science"=>1,"Math"=>2},:label=>false,:placeholder=>"Favourite Class",input_html:{:value=>@student.favourite_class,:class=>'form-control profile-input field hide'},:include_blank=>true
+					.col-lg-12.profile-fields
+						.col-md-5
+							Study Groups
+						.col-md-7.form-group	
+							.profile-text #{ (@student.study_groups) ? @student.study_groups : '--'}
+							.form-inputs
+								=f.input :study_groups,:label=>false,:placeholder=>"Study Groups",input_html:{:value=>@student.study_groups,:class=>'form-control profile-input field hide'}
+					.col-lg-12.profile-fields
+						.col-md-5
+							Awards
+						.col-md-7.form-group    	
+							.profile-text #{ (@student.awards) ? @student.awards : '--'}
+							.form-inputs
+								=f.input :awards,:label=>false,:placeholder=>"Awards",input_html:{:value=>@student.awards,:class=>'form-control profile-input field hide'}
+					.col-lg-12.profile-fields
+						.col-md-5
+							
+						.col-md-7
+							.form-actions.profile-input.hide
+								= f.button :submit, "Update",:class=>'btn btn-primary'
+    
+			.col-md-6
+				%h4{:class=>'page-header'} Classmates

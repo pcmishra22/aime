@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   namespace :student do
     resources :dashboard
+    resources :profiles , only: [:edit,:update]
   end
 
 
