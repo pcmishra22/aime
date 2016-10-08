@@ -1,0 +1,10 @@
+%div.panel.panel-default
+  %div.panel-body.panel-all
+
+    %span
+      = link_to 'Upload Document', '#', {class: 'btn btn-primary js-admin-fp-button',
+                                                              data: {'fp-apikey': Rails.configuration.filepicker_rails_api_key,
+                                                                     'fp-bucket': Rails.configuration.filepicker_rails_store_container,
+                                                                     'fp-store-path': 'aime/'}}
+- content_for(:custom_javascripts) do
+  = render 'layouts/filepicker_lib'

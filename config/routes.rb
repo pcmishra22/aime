@@ -23,6 +23,9 @@ Rails.application.routes.draw do
     resources :dashboard
   end
 
+  get 'tests/upload', to: 'tests#upload'
+  post 'tests/upload_file', to: 'tests#upload_file'
+
 
 
 end
