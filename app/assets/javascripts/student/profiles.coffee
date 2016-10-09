@@ -8,3 +8,10 @@ $(".edit-profile").click ->
 $(".cancel-profile").click ->	
 	$(".profile-input").addClass("hide")
 	$(".profile-text").removeClass("hide")
+	$(".error").addClass("hide")
+
+$ ->
+	if (typeof update_file != 'undefined' && update_file == 1) 
+		$(".profile-text").addClass("hide")
+		$(".profile-input").removeClass("hide")
+	

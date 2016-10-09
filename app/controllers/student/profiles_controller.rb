@@ -8,7 +8,7 @@ class Student::ProfilesController < Student::ApplicationController
   def update
   	@student = Student.find params[:id]
   	if(@student.update(update_param))
-  		redirect_to students_profile_path , :notice=>'Profile Successfully Updated.'
+  		redirect_to edit_student_profile_path(params[:id]) , :notice=>'Profile Successfully Updated.'
   	else 
   		render :edit
   	end
