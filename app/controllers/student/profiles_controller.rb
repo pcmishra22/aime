@@ -1,6 +1,6 @@
 class Student::ProfilesController < Student::ApplicationController
   layout 'student'
-  
+  helper UsersHelper
   def edit
   	@student = Student.find current_user.id
   end
