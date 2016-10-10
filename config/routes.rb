@@ -7,8 +7,10 @@ Rails.application.routes.draw do
   devise_for :users
 
   namespace :student do
+    post '/profiles/upload_file'
     resources :dashboard
-    resources :profiles , only: [:edit,:update]
+    resources :profiles , only: [:edit,:update,:upload_file]
+
   end
 
 
@@ -26,7 +28,6 @@ Rails.application.routes.draw do
 
   get 'tests/upload', to: 'tests#upload'
   post 'tests/upload_file', to: 'tests#upload_file'
-
 
 
 end
