@@ -6,12 +6,22 @@ class Student::ProfilesController < Student::ApplicationController
   end
 
   def update
-  	@student = Student.find params[:id]
+  	@student = Student.find current_user.id
   	if(@student.update(update_param))
-  		redirect_to edit_student_profile_path(params[:id]) , :notice=>'Profile Successfully Updated.'
+  		redirect_to edit_student_profile_path(current_user.id) , :notice=>'Profile Successfully Updated.'
   	else 
   		render :edit
   	end
+  end
+  def upload_file
+    if( params[:converted] == "true" )
+      @student = Student.find current_user.id
+      @student.profile_photo = params[:url]
+      @student.save
+      redirect_to edit_student_profile_path(current_user.id), :notice=>'Profile Photo Updated Successfully Updated.'
+    else
+      redirect_to edit_student_profile_path(current_user.id), :notice=>'Profile Photo is not updated.'
+    end
   end
   private
 	#user update allowed param
