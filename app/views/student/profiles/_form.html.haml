@@ -10,12 +10,14 @@
 						%img{ :src => @student.profile_photo,:height=>150,:width=>150 ,:class=>'profile-pic'}
 					-else
 						.profile-pic
-					= link_to 'Edit Photo', '#', {class: 'btn btn-primary js-admin-fp-button profile-input hide',data: {'fp-apikey': Rails.configuration.filepicker_rails_api_key,'fp-bucket': Rails.configuration.filepicker_rails_store_container,'fp-store-path': 'aime/'}}
+					= link_to 'Change Photo', '#', {class: 'btn btn-primary js-admin-fp-button profile-input hide',data: {'fp-apikey': Rails.configuration.filepicker_rails_api_key,'fp-bucket': Rails.configuration.filepicker_rails_store_container,'fp-store-path': 'aime/'}}
 				.col-md-7.profile-info.form-group 
 					.profile-text #{ @student.first_name } #{ @student.last_name }
 					.form-inputs 
 						=f.input :first_name,:label=>false,:placeholder=>"First Name",input_html:{:value=>@student.first_name,:class=>'profile-fields profile-input field hide',:required=>true}
 						=f.input :last_name,:label=>false,:placeholder=>"Last Name",input_html:{:value=>@student.last_name,:class=>'profile-fields profile-input field hide'}
+					%br
+					=render "social_links"
 				.col-md-2
 					.edit-profile.profile-text 
 						%a.btn.btn-primary Edit

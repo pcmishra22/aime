@@ -8,8 +8,9 @@ Rails.application.routes.draw do
 
   namespace :student do
     post '/profiles/upload_file'
+    post '/profiles/social_update'
     resources :dashboard
-    resources :profiles , only: [:edit,:update,:upload_file]
+    resources :profiles , only: [:edit,:update,:upload_file,:social_update]
 
   end
 

@@ -23,6 +23,24 @@ class Student::ProfilesController < Student::ApplicationController
       redirect_to edit_student_profile_path(current_user.id), :notice=>'Profile Photo is not updated.'
     end
   end
+  def social_update
+    @student = Student.find current_user.id
+    if (params[:social_type] == "twitter")
+      @student.twitter = params[:url]
+    elsif (params[:social_type] == "facebook")
+      @student.facebook = params[:url]
+    elsif (params[:social_type] == "instagram")
+      @student.instagram = params[:url]
+    elsif (params[:social_type] == "google")
+      @student.google = params[:url]
+    elsif (params[:social_type] == "pininterest")
+      @student.pininterest = params[:url]
+    elsif (params[:social_type] == "mailbox")
+      @student.mailbox = params[:url]
+    end
+    @student.save
+    render :json => {:status=>'1',:msg=>"Successfully Updated."}
+  end
   private
 	#user update allowed param
 	def update_param
