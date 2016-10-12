@@ -1,0 +1,90 @@
+.container.profile-main
+= simple_form_for(@teacher ,:url=> url_for(:action=>"update",:controller=>"profiles")) do |f|
+	= f.error_notification
+
+	.row
+		.col-lg-12 
+			.profile-top
+				.col-md-3
+					-if !@teacher.profile_photo.blank?
+						%img{ :src => @teacher.profile_photo,:height=>150,:width=>150 ,:class=>'profile-pic'}
+					-else
+						.profile-pic
+					= link_to 'Change Photo', '#', {class: 'btn btn-primary js-admin-fp-button profile-input hide',data: {'fp-apikey': Rails.configuration.filepicker_rails_api_key,'fp-bucket': Rails.configuration.filepicker_rails_store_container,'fp-store-path': 'aime/'}}
+				.col-md-7.profile-info.form-group 
+					.profile-text #{ @teacher.first_name } #{ @teacher.last_name }
+					.form-inputs 
+						=f.input :first_name,:label=>false,:placeholder=>"First Name",input_html:{:value=>@teacher.first_name,:class=>'profile-fields profile-input field hide',:required=>true}
+						=f.input :last_name,:label=>false,:placeholder=>"Last Name",input_html:{:value=>@teacher.last_name,:class=>'profile-fields profile-input field hide'}
+					.profile-age #{ (@teacher.dob) ? "#{age(@teacher.dob)} YEARS OLD" : '' }  
+					%br
+					=render "social_links"
+				.col-md-2
+					.edit-profile.profile-text 
+						%a.btn.btn-primary Edit
+					.cancel-profile.profile-input.hide 
+						%a.btn.btn-primary Cancel
+
+	.row
+		.col-lg-12
+			.col-md-12
+				%h4{:class=>'page-header'} User Info
+				.uppercase
+					.col-lg-12.profile-fields
+						.col-md-5
+							Birthday
+						.col-md-7.form-group	
+							.profile-text #{ (@teacher.dob) ? @teacher.dob : '--'}
+							.form-inputs
+								=f.input :dob,:label=>false,start_year: Time.now.year - 90, end_year: Time.now.year - 8,input_html:{:value=>@teacher.dob,:class=>'form-control profile-input field hide',:type=>'date'}
+					.col-lg-12.profile-fields
+						.col-md-5
+							Languages
+						.col-md-7.form-group	
+							.profile-text #{ (@teacher.languages.blank?) ? '--' : @teacher.languages }
+							.form-inputs
+								=f.input :languages,:label=>false,:placeholder=>"Langauges",input_html:{:value=>@teacher.languages,:class=>'form-control profile-input field hide'}
+					.col-lg-12.profile-fields
+						.col-md-5
+							Activities
+						.col-md-7.form-group	
+							.profile-text #{ (@teacher.activities.blank?) ? '--' : @teacher.activities}
+							.form-inputs
+								=f.input :activities,:label=>false,:placeholder=>"Activities",input_html:{:value=>@teacher.activities,:class=>'form-control profile-input field hide'}
+					.col-lg-12.profile-fields
+						.col-md-5
+							Videos
+						.col-md-7.form-group	
+							.profile-text #{ (@teacher.videos.blank?) ? '--' :  @teacher.videos}
+							.form-inputs
+								=f.input :videos,:label=>false,:placeholder=>"Videos",input_html:{:value=>@teacher.videos,:class=>'form-control profile-input field hide'}
+					.col-lg-12.profile-fields
+						.col-md-5
+							Favourite Class
+						.col-md-7.form-group	
+							.profile-text #{ (@teacher.favourite_class) ? @courses[@teacher.favourite_class] : '--'}
+							.form-inputs
+								= f.input :favourite_class,:type=>"select",:collection => {"Science"=>1,"Math"=>2},:label=>false,:placeholder=>"Favourite Class",input_html:{:value=>@teacher.favourite_class,:class=>'form-control profile-input field hide'},:include_blank=>true
+					.col-lg-12.profile-fields
+						.col-md-5
+							Awards
+						.col-md-7.form-group    	
+							.profile-text #{ (@teacher.awards.blank?) ? '--' :  @teacher.awards }
+							.form-inputs
+								=f.input :awards,:label=>false,:placeholder=>"Awards",input_html:{:value=>@teacher.awards,:class=>'form-control profile-input field hide'}
+					.col-lg-12.profile-fields
+						.col-md-5
+							
+						.col-md-7
+							.form-actions.profile-input.hide
+								= f.button :submit, "Update",:class=>'btn btn-primary'
+    
+-if(!params[:commit].blank? )
+- content_for (:custom_javascripts) 
+	:javascript
+		update_file = 1;
+
+- content_for(:custom_javascripts) do
+	:javascript
+		upload_path = "/teacher/profiles/upload_file";
+	= render 'layouts/filepicker_lib'
