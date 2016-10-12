@@ -1,5 +1,15 @@
 Rails.application.routes.draw do
 
+  get 'pages/about'
+
+  get 'pages/aimesays'
+
+  get 'pages/careers'
+
+  get 'pages/contact'
+
+  get 'pages/videos'
+
   root to: 'visitors#index'
 
   resources :users , only: [:new,:create]
@@ -26,9 +36,6 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :dashboard
   end
-
-  get 'tests/upload', to: 'tests#upload'
-  post 'tests/upload_file', to: 'tests#upload_file'
 
 
 end
