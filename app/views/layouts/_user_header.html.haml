@@ -1,5 +1,6 @@
 %ul.nav.nav-pills.pull-right
   - if user_signed_in?
+    %li= link_to "Profile", edit_parent_profile_path(current_user.id)
     %li= link_to "Sign out", destroy_user_session_path, :method => :delete
   - else
     %li= link_to "Sign in", new_user_session_path

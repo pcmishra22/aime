@@ -33,7 +33,10 @@ Rails.application.routes.draw do
   end
 
   namespace :parent do
+    post '/profiles/upload_file'
+    post '/profiles/social_update'
     resources :dashboard
+    resources :profiles , only: [:edit,:update,:upload_file,:social_update]
   end
 
   namespace :admin do
