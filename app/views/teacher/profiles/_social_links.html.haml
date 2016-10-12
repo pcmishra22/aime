@@ -1,0 +1,60 @@
+%a.btn.btn-info.btn-lg{ :href=>"javascript:;",:'data-toggle'=>"modal",:'data-target'=>"#social_links",:'data-name'=>"Twitter",:'id'=>"twitter",:'data-val'=>"#{ @teacher.twitter }"}
+	TW
+%a.btn.btn-info.btn-lg{ :href=>"javascript:;",:'data-toggle'=>"modal",:'data-target'=>"#social_links",:'data-name'=>"Facebook",:'id'=>"facebook",:'data-val'=>"#{ @teacher.facebook }"}
+	FB
+%a.btn.btn-info.btn-lg{ :href=>"javascript:;",:'data-toggle'=>"modal",:'data-target'=>"#social_links",:'data-name'=>"Instagram",:'id'=>"instagram",:'data-val'=>"#{ @teacher.instagram }"}
+	INST
+%a.btn.btn-info.btn-lg{ :href=>"javascript:;",:'data-toggle'=>"modal",:'data-target'=>"#social_links",:'data-name'=>"Google",:'id'=>"google",:'data-val'=>"#{ @teacher.google }"}
+	G+
+%a.btn.btn-info.btn-lg{ :href=>"javascript:;",:'data-toggle'=>"modal",:'data-target'=>"#social_links",:'data-name'=>"Pininterest",:'id'=>"pininterest",:'data-val'=>"#{ @teacher.pininterest }"}
+	PIN
+%a.btn.btn-info.btn-lg{ :href=>"javascript:;",:'data-toggle'=>"modal",:'data-target'=>"#social_links",:'data-name'=>"MailBox",:'id'=>"mailbox",:'data-val'=>"#{ @teacher.mailbox }"}
+	Mail
+
+
+.modal.fade.in{:id=>'social_links',:role=>'dialog'}
+	.modal-dialog.modal-sm
+		.modal-content
+			.modal-header
+				%button.close{:'data-dismiss'=>"modal"}
+					Close
+				.modal-title
+			.modal-body
+				%input{:type=>"text",:name=>"url",:id=>"url",:value=>""}
+				%input{:type=>"hidden",:name=>"social_type",:id=>"social_type",:value=>""}
+			.modal-footer
+				%a.btn.btn-default{:href=>"javascript:;",:id=>"social_form_submit"}
+					Submit
+				%button.btn.btn-default{:'data-dismiss'=>"modal"}
+					Cancel
+
+
+- content_for(:custom_javascripts) do
+	:javascript
+		social_type = "";
+		$('#social_links').on('shown.bs.modal', function (e) {
+			var dt = $(e.relatedTarget);
+			social_type="";
+			$(".modal-title").html("");
+			$("#social_type").val("");
+			$("#url").val(dt.attr("data-val"));			
+			social_type = dt.attr("data-name");
+			$("#social_type").val(dt.attr("id"));
+			$(".modal-title").html("Enter "+ social_type + " URL ");
+		});
+		$("#social_form_submit").on('click' , function() {
+			$.ajax({
+				type: "POST",
+				contentType: "application/json; charset=utf-8",
+				url: "/teacher/profiles/social_update",
+				data : JSON.stringify({url:$("#url").val(),social_type:$("#social_type").val()}),
+				dataType: "json",
+				success: function (result) {
+					$("#"+$("#social_type").val()).attr("data-val",$("#url").val());
+					$('#social_links').modal('toggle');
+				},
+				error: function (){
+					$('#social_links').modal('toggle');
+				}
+			});
+		});

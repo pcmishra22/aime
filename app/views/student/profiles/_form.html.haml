@@ -62,7 +62,7 @@
 						.col-md-5
 							Favourite Class
 						.col-md-7.form-group	
-							.profile-text #{ (@student.favourite_class) ? @student.favourite_class : '--'}
+							.profile-text #{ (@student.favourite_class) ? @courses[@student.favourite_class] : '--'}
 							.form-inputs
 								= f.input :favourite_class,:type=>"select",:collection => {"Science"=>1,"Math"=>2},:label=>false,:placeholder=>"Favourite Class",input_html:{:value=>@student.favourite_class,:class=>'form-control profile-input field hide'},:include_blank=>true
 					.col-lg-12.profile-fields
@@ -93,5 +93,8 @@
 	:javascript
 		update_file = 1
 
+
 - content_for(:custom_javascripts) do
+	:javascript
+		upload_path = "/student/profiles/upload_file";
 	= render 'layouts/filepicker_lib'

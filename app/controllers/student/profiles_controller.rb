@@ -3,6 +3,7 @@ class Student::ProfilesController < Student::ApplicationController
   helper UsersHelper
   def edit
   	@student = Student.find current_user.id
+    @courses = {1=>"Science",2=>"Math"}
   end
 
   def update

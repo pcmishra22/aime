@@ -12,7 +12,7 @@ $(document).ready(function(){
                 storeContainer: $(this).data('fp-bucket')
             },
             function(blobs){
-                $.post('/student/profiles/upload_file', blobs[0])
+                $.post(upload_path, blobs[0])
                     .done(function () {
                         location.reload();
                     })
