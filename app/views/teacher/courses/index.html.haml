@@ -1,0 +1,17 @@
+.container
+	.row
+		.col-lg-12
+			%h2{:class=>'page-header'} Courses
+		= link_to "Add Course" ,new_teacher_course_path,:class=>'btn btn-primary'
+		.col-lg-12.page-header
+			.col-md-6
+				%strong Course Name
+			.col-md-6
+				%strong Action
+
+		- @course.each do |course|	
+			.row
+				.col-md-6.m-t-10
+					= course.name
+				.col-md-6.m-t-10
+					= link_to "Edit" ,edit_teacher_course_path(course)

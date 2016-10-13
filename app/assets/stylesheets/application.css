@@ -84,3 +84,7 @@ body {
 .uppercase{
     text-transform:uppercase;
 }
+/* default Margin */
+.m-t-10{
+    margin:10px;
+}
