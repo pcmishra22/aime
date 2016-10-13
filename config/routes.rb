@@ -30,6 +30,7 @@ Rails.application.routes.draw do
     post '/profiles/social_update'
     resources :dashboard
     resources :profiles , only: [:edit,:update,:upload_file,:social_update]
+    resources :courses
   end
 
   namespace :parent do

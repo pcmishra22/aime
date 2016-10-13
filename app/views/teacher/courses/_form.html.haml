@@ -1,0 +1,10 @@
+.container
+	.row.col-lg-6
+		= simple_form_for([:teacher,@course]) do |f|
+			= f.error_notification
+			.form-group
+				.form-inputs
+					=f.input :name,:label=>"Course Name",:placeholder=>"New Course Name",input_html:{:class=>'form-control'}
+			.form-actions.profile-input
+				= f.button :submit, "Submit",:class=>'btn btn-primary'
+				= link_to "Cancel" ,teacher_courses_path,:class=>'btn btn-primary'
