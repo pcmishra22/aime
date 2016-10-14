@@ -1,7 +1,7 @@
 class Teacher::CoursesController < Teacher::ApplicationController
   before_action :set_course,only:[:edit,:update]
   def index
-  	@course = Course.where(:teacherid=>current_user.id,:status=>true)
+  	@course = Course.my_active_courses(current_user.id)
   end
 
   def new

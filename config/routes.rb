@@ -31,6 +31,7 @@ Rails.application.routes.draw do
     resources :dashboard
     resources :profiles , only: [:edit,:update,:upload_file,:social_update]
     resources :courses
+    resources :schedules
   end
 
   namespace :parent do
