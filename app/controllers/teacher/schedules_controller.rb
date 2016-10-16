@@ -17,7 +17,7 @@ class Teacher::SchedulesController < Teacher::ApplicationController
   end
   private
   def schedule_params
-  	params.require(:schedule).permit(:topic,:course_id)
+  	params.require(:schedule).permit(:topic,:course_id,:startdate,:enddate)
   end
   def set_courses
     @course_id = params[:id]
