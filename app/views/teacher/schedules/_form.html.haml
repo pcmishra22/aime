@@ -7,7 +7,20 @@
 					=f.input :topic,:label=>"Topic",:placeholder=>"Schedule Topic",input_html:{:class=>'form-control'}
 			.form-group
 				.form-inputs
-					=f.select :course_id,@courses.collect{|c| [c.name,c.id]},{},{:label=>"Course",:class=>'form-control'}
+					=f.label :course_id,"Course"
+					=f.select :course_id,@courses.collect{|c| [c.name,c.id]},{prompt: "Select Course",selected:@course_id},{:class=>'form-control'}
+			.form-group
+				.form-inputs
+					= f.input :startdate, :placeholder => "MM/DD/YYYY", :input_html => {:class => " datepicker date-picker"}, :label => "Start Date",as:"date"
+			.form-group
+				.form-inputs.input-append.bootstrap-timepicker
+					= f.input :starttime, :input_html => { :id => "start_time", :class => "input-append bootstrap-timepicker"}, :label => "Start At " 
+			.form-group
+				.form-inputs
+					= f.input :enddate, :placeholder => "MM/DD/YYYY", :input_html => {:class => " datepicker date-picker"}, :label => "End Date"
+			.form-group
+				.form-inputs.input-append.bootstrap-timepicker
+					= f.input :endtime, :input_html => { :id => "start_time", :class => "input-append bootstrap-timepicker"}, :label => "Finish At "   
 			.form-actions.profile-input
 				= f.button :submit, "Submit",:class=>'btn btn-primary'
 				= link_to "Cancel" ,teacher_courses_path,:class=>'btn btn-primary'

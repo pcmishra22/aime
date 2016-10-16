@@ -1,4 +1,5 @@
 class Teacher::CoursesController < Teacher::ApplicationController
+  layout 'teacher'
   before_action :set_course,only:[:edit,:update]
   def index
   	@course = Course.my_active_courses(current_user.id)
