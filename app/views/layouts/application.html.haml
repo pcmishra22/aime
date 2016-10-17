@@ -12,15 +12,35 @@
 
     = csrf_meta_tags
     = yield :custom_heads
-  %body
+  %body{style:"background-color:grey"}
+    .clearfix{style:"background-color:grey"}
+      .container{style:"background-color: black;color: white;" }
+        .navigation.clearfix
+          .col-lg-3.col-sm-3.col-xs-3.col-md-3.pull-left
+            = image_tag( 'logo.png')
+          .col-lg-5.offset-lg-4.col-sm-5.offset-sm-4.col-xs-5.offset-xs-4.col-md-5.offset-xm-4.border.pull-right
+            = render 'layouts/user_header'
+        .content-wrapper
+          = yield
+        = render 'layouts/footer'
+  = javascript_include_tag 'application'
+  = yield :custom_javascripts
+  :javascript
+    function myFunction() {
+      document.getElementById("myDropdown").classList.toggle("show");
+    }
 
-
-    .container
-      .masthead
-        = render 'layouts/user_header'
-        %div= link_to image_tag( 'logo.png', width: 150), root_path
-      .body-wrapper
-        = yield
-      = render 'layouts/footer'
-    = javascript_include_tag 'application'
-    = yield :custom_javascripts
+    function filterFunction() {
+      var input, filter, ul, li, a, i;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      div = document.getElementById("myDropdown");
+      a = div.getElementsByTagName("a");
+      for (i = 0; i < a.length; i++) {
+        if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+          a[i].style.display = "";
+        } else {
+          a[i].style.display = "none";
+        }
+      }
+    }

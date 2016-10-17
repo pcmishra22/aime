@@ -1,0 +1,31 @@
+.col-lg-12.col-md-12.col-xm-12.col-sm-12.Sign-up-box
+	.text-center
+		%h2{:class=>"signup"} Log in
+		= image_tag("trim.png")
+	.clearfix.rest.padding30
+		.col-sm-12.colums
+			= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :role => 'form',:class=>"padding15 text-center"}) do |f|
+				= devise_error_messages!
+
+				.form-group.has-feedback
+					= f.label :email,:class=>"sr-only control-label"
+					= f.email_field :email, :autofocus => true, class: 'form-control input-lg usernamee',placeholder:"Email"
+
+				.form-group.has-feedback
+					= f.label :password,:class=>"sr-only control-label"
+					= f.password_field :password, class: 'form-control  input-lg usernamee' ,:title=>"Password must contain at least 6 characters, including UPPER/lowercase and numbers" ,:required=>"", :onchange=>"this.setCustomValidity(this.validity.patternMismatch ? this.title : ''); if(this.checkValidity()) form.pwd2.pattern = this.value",:placeholder=>"Password" 
+
+				= f.submit 'Log in', :class => 'btn btn-block btn-danger btn-lg sign-up'
+
+			.padding16.text-center
+				%span{:class=>"text-white"} Don't have an account?
+				%p{class:"lead"} 
+					= link_to "Sign up now for free", new_user_path,:class=>"text-danger"
+				- if devise_mapping.recoverable?
+					%span{class:"text-white"} Forgot your password?
+					%p{class:"text-danger lead"}
+						= link_to "Remind password?", new_password_path(resource_name),:class=>"text-danger"
+
+				-#if devise_mapping.rememberable?
+					-#.checkbox
+						-#= f.check_box :remember_me
