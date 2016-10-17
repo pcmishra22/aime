@@ -1,33 +1,53 @@
-= simple_form_for(@user) do |f|
-  = f.error_notification
+.clearfix.rest.padding30
+  .col-sm-4.text-center
+    %b
+      %input{type:"button",class:[ ("login_tabs sign_type btn-lg btn btn-default Parents"),((@user.type == nil || @user.type=="Student") ? "active" : "") ],value:"Student"}
+  .col-sm-4.text-center
+    %b
+      %input{type:"button",class:[ ("login_tabs sign_type btn-lg btn btn-default Parents"),((@user.type!= nil && @user.type=="Teacher") ? "active" : "") ],value:"Teacher"}
+  .col-sm-4.text-center
+    %b
+      %input{type:"button",class:[ ("login_tabs sign_type btn-lg btn btn-default Parents"),((@user.type!= nil && @user.type=="Parent") ? "active" : "") ],value:"Parent"}
+  .col-sm-12.colums
+    = simple_form_for(@user,:html =>{class:"padding15 text-center"}) do |f|
+      = f.error_notification
+      .form-group.has-feedback
+        = f.input :first_name,:label=>false,placeholder:"First Name" ,:input_html=>{ :class=>'form-control input-lg usernamee' }
+        %span{class:"fa-2x fa fa-user text-muted form-control-feedback"}
 
-  .form-group
-    .form-inputs
-      = f.input :first_name,:label=>'First Name' ,:input_html=>{ :class=>'form-control' }
+      .form-group.has-feedback
+        = f.input :last_name,:label=>false,placeholder:"Last Name" ,:input_html=>{ :class=>'form-control input-lg usernamee' }
 
-  .form-group
-    .form-inputs
-      = f.input :last_name,:label=>'Last Name' ,:input_html=>{ :class=>'form-control' }
+      .form-group.has-feedback
+        = f.input :email,:label=>'Email' ,:label=>false,placeholder:"Email" ,:input_html=>{ :class=>'form-control input-lg usernamee' }
 
-  .form-group
-    .form-inputs
-      = f.input :email,:label=>'Email' ,:input_html=>{ :class=>'form-control' }
+      .form-group.has-feedback
+        = f.input :password,:label=>false,placeholder:"Password" ,:input_html=>{ :class=>'form-control input-lg usernamee' }
 
-  .form-group
-    .form-inputs
-      = f.input :password,:label=>'Password' ,:input_html=>{ :class=>'form-control' }
-
-  .form-group
-    .form-inputs
-      = f.input :password_confirmation,:label=>'Confirm Password' ,:input_html=>{ :class=>'form-control' }
-  .form-group
-    .form-inputs
-      = f.input :type,
-        collection: [['Student', 'Student'],['Teacher','Teacher'],['Parent','Parent']],
-        label_method: :last,
-        value_method: :first,
-        as: :radio_buttons,
-        checked: 'Student',
-        required: true
-  .form-actions
-    = f.button :submit, "Submit",:class=>'btn btn-primary'
+      .form-group.has-feedback
+        = f.input :password_confirmation,:label=>false,placeholder:"Confirm Password" ,:input_html=>{ :class=>'form-control input-lg usernamee' }
+      .form-group.has-feedback
+        = f.hidden_field :type,type:"hidden",value:"Student"
+      .form-group
+        %span{class:"text-white"} 
+          By clicking 'sign up', you agree to
+          %a{href:"#"} Terms &amp; Conditions 
+          and 
+          %a{href:"#"} Privacy Policy.
+          %br
+          Already have an account?
+          = link_to "Sign in", new_user_session_path
+      .form-actions
+        = f.button :submit, "Sign Up",:class=>'btn btn-block btn-danger btn-lg sign-up'
+- content_for(:custom_javascripts) do
+  :javascript
+    $( document ).ready(function() {
+      $(".sign_type").click(function(){
+        $("#user_type").val($(this).val());
+        type_selection();
+        $(this).addClass("active");
+      });
+      function type_selection(){
+        $(".sign_type").removeClass("active");
+      }
+    });
