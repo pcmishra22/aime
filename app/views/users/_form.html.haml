@@ -1,11 +1,11 @@
 .clearfix.rest.padding30
-  .col-sm-4.text-center
+  .col-sm-4.text-center.signup-tab
     %b
       %input{type:"button",class:[ ("login_tabs sign_type btn-lg btn btn-default Parents"),((@user.type == nil || @user.type=="Student") ? "active" : "") ],value:"Student"}
-  .col-sm-4.text-center
+  .col-sm-4.text-center.signup-tab
     %b
       %input{type:"button",class:[ ("login_tabs sign_type btn-lg btn btn-default Parents"),((@user.type!= nil && @user.type=="Teacher") ? "active" : "") ],value:"Teacher"}
-  .col-sm-4.text-center
+  .col-sm-4.text-center.signup-tab
     %b
       %input{type:"button",class:[ ("login_tabs sign_type btn-lg btn btn-default Parents"),((@user.type!= nil && @user.type=="Parent") ? "active" : "") ],value:"Parent"}
   .col-sm-12.colums
