@@ -15,12 +15,168 @@
  *= require bootstrap-datepicker
  */
 
-body {
-    #background-color: #3A3A3A;
+Body {margin:0; padding:0;}
+.hero{font-size:100px;}
+div{margin:0; padding:0 !important;}
+.navigation a{color: white !important;
+    border-left: 1px solid #fff;
+    padding: 35px;
+    padding-top: 41px;
+    display: block-inline;
+    line-height: 104px;
+    padding-bottom: 48px;
+    text-decoration: none;
+    margin: -2px; background-color:transparent !important;}
+.navigation a:hover{background-color:grey !important; color:#000 !important;} 
+.border{border-right:1px solid grey;}
+.navigation{border-bottom:1px solid #fff;}
+ul{margin:0 !important; padding:0 !important;}
+li{margin:0 !important; padding:0 !important;}
+.columns li{display:inline-block;}
+.differ{padding-right: 36px !important;}
+.w{    width: 11%;
+    position: absolute;
+    top: 50px;
+    right: 15px;
+    z-index: 0;}
+
+
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+
 }
 
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #3e8e41;
+}
+#myInput {
+    border-box: box-sizing;
+    background-image: url('searchicon.png');
+    background-position: 14px 12px;
+    background-repeat: no-repeat;
+    font-size: 16px;
+    padding: 14px 20px 12px 45px;
+    border: none;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f6f6f6;
+    min-width: 230px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+    color: black;
+    /* padding: 1px 82px; */
+    text-decoration: none;
+    display: block;
+    color: black !important;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-right: 0px;
+    padding-left: 84px;
+    line-height: 74px; margin:0 !important;}
+
+.dropdown a:hover {background-color: #ddd}
+
+.show {display:block; z-index: 999;}
+
+
+
+.carousel {
+  margin-bottom: 0rem;
+}
+/* Since positioning the image, we need to help out the caption */
+.carousel-caption {
+  z-index: 10;
+}
+
+/* Declare heights because of positioning of img element */
+.carousel-item {
+  height: 32rem;
+  background-color: #777;
+}
+.carousel-item > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  height: 32rem;
+}
+
+.carousel-indicators {
+  top: 1.5rem;
+  right: 1.5rem;
+  bottom: auto;
+  left: auto;
+  width: 1rem;
+  margin-left: 0;
+}
+
+.carousel-indicators > li {
+  margin-bottom: .25rem;
+}
+ul.foot{BACKGROUND-COLOR: #242323 !important; 
+    LIST-STYLE-TYPE: NONE;}
+  ul.foot li{list-style-type:none; display:inline-block;}
+  ul.foot li a{border-right: 1px solid #fff;
+    padding-left: 80px;
+    color: #fff;
+    padding-right: 80px;
+    text-decoration: none;
+    padding-top: 8px;
+    padding-bottom: 3px;}
+ul.foot li a:hover{ color:grey; }
+.aimse{font-size:22px !important; color:#039BD4 !important; padding-left: 64px !important;
+    padding-right: 64px !important; border:hidden !important; }
+.dropdown a:hover {
+    background-color: #ddd; padding-right:56px!important;
+}
+
+
+
+/* RESPONSIVE CSS
+-------------------------------------------------- */
+
+@media (min-width: 40em) {
+  /* Bump up size of carousel content */
+  .carousel-caption p {
+    margin-bottom: 1.25rem;
+    font-size: 1.25rem;
+    line-height: 1.4;
+  }
+
+  .featurette-heading {
+    font-size: 50px;
+  }
+}
+
+@media (min-width: 62em) {
+  .featurette-heading {
+    margin-top: 7rem;
+  }
+}
+
+
+
+
+/*----OLD Delete---*/
+
 .container {
-    width: 970px;
+
     #background-color: black;
     padding: 0;
 }
@@ -33,59 +189,8 @@ body {
 .masthead{
     padding-top: 10px;
     background-color: #191919;
-    height: 60px;
-}
-
-.footer-bottom {
-    padding-top: 10px;
-    padding-bottom: 5px;
-    background-color: #191919;
-    padding-left: 10px;
-    color:#fff;
+    height: 80px;
 }
 
 
 
-.authform {
-    margin: 0 auto;
-    max-width: 420px;
-    padding-top: 30px;
-}
-.authform .right {
-    float: right !important;
-}
-
-.authform form, .authform fieldset {
-    border: 1px solid #e3e3e3;
-    border-radius: 4px;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05) inset;
-    min-height: 20px;
-    padding: 19px;
-}
-
-.btn, .submit, .authform .button, .button-xs {
-    -moz-user-select: none;
-    background-image: none;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    cursor: pointer;
-    display: inline-block;
-    font-size: 14px;
-    font-weight: normal;
-    line-height: 1.42857;
-    margin-bottom: 0;
-    padding: 6px 12px;
-    text-align: center;
-    vertical-align: middle;
-    white-space: nowrap;
-    background-color: #438bd7;
-    border-color: #438bd7;
-    color: #fff;
-}
-.uppercase{
-    text-transform:uppercase;
-}
-/* default Margin */
-.m-t-10{
-    margin-top:10px;
-}
