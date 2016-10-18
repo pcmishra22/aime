@@ -13,7 +13,13 @@ class ApplicationController < ActionController::Base
 
   end
 
+  def layout
+    @layout = current_user.type.downcase unless current_user || ""
+  end
 
+  def authorize
+    redirect_to new_user_session_path unless current_user
+  end
 
   protected
 
