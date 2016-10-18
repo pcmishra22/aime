@@ -36,7 +36,7 @@
 						.col-md-7.form-group	
 							.profile-text #{ (@parent.dob) ? @parent.dob : '--'}
 							.form-inputs
-								=f.input :dob,:label=>false,start_year: Time.now.year - 90, end_year: Time.now.year - 8,input_html:{:value=>@parent.dob,:class=>'form-control profile-input field hide',:type=>'date'}
+								=f.input :dob,:label=>false,start_year: Time.now.year - 90, end_year: Time.now.year - 8,input_html:{:value=>@parent.dob,:class=>'form-control dob-profile datepicker date-picker profile-input field hide'},as: :string
 					.col-lg-12.profile-fields
 						.col-md-5
 							Languages

@@ -18,6 +18,7 @@
         = render 'layouts/teacher_header'
         %div= link_to image_tag( 'logo.png', width: 150), root_path
       .body-wrapper
+        = render 'layouts/messages'
         = yield
       = render 'layouts/footer'
     = javascript_include_tag 'application'

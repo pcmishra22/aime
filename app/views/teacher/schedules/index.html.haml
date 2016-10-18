@@ -23,4 +23,4 @@
 					= schedule.enddate.strftime("%d-%m-%Y ")
 					= schedule.endtime.strftime("%H:%M")
 				.col-md-3.m-t-10
-					= link_to "Edit" ,edit_teacher_schedule_path(schedule)
+					= link_to "Edit" ,edit_teacher_schedule_path(schedule,:course_id=>schedule.course_id)
