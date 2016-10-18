@@ -1,4 +1,3 @@
-=params
 .container
 	.row.col-lg-6
 		= simple_form_for([:teacher,@schedule]) do |f|
@@ -9,15 +8,24 @@
 			.form-group
 				.form-inputs
 					=f.label :course_id,"Course"
-					=f.select :course_id,@courses.collect{|c| [c.name,c.id]},{prompt: "Select Course",selected:@course_id},{:class=>'form-control'}
+					=f.select :course_id,@courses.collect{|c| [c.name,c.id]},{selected:@course_id},{:class=>'form-control'}
 			.form-group
 				.form-inputs.form-inline
 					= f.label :startdate,"Start Date"
-					= f.input :startdate, :placeholder => "MM/DD/YYYY", :input_html => {:class => "form-control dateField datepicker date-picker",type:'datetime'}, :label => false,as: :string
+					= f.input :startdate, :placeholder => "YYYY-MM-DD", :input_html => {:class => "form-control dateField datepicker date-picker"}, :label => false,as: :date
 			.form-group
 				.form-inputs.form-inline
 					= f.label :enddate,"End Date"
-					= f.input :enddate, :placeholder => "MM/DD/YYYY", :input_html => {:class => "form-control dateField datepicker date-picker",type:'datetime'}, :label => false,as: :string
+					= f.input :enddate, :placeholder => "YYYY-MM-DD", :input_html => {:class => "form-control dateField datepicker date-picker"}, :label => false,as: :date
+			.form-group
+				.form-inputs.form-inline
+					= f.label :starttime,"Course Start Time"
+					= f.input :starttime, :input_html => {:class => "form-control"}, :label => false,as: :time
+
+			.form-group
+				.form-inputs.form-inline
+					= f.label :endtime,"Course Start Time"
+					= f.input :endtime, :input_html => {:class => "form-control"}, :label => false,as: :time
 
 			.form-actions.profile-input
 				= f.button :submit, "Submit",:class=>'btn btn-primary'
@@ -25,5 +33,5 @@
 - content_for(:custom_javascripts) do
 	:javascript
 		$(function (){
-			$('.dateField').datepicker({ dateFormat: 'D, dd M yy',startDate: new Date() });
+			$('.dateField').datepicker({ dateFormat: 'D, yy M dd',startDate: new Date() });
 		});

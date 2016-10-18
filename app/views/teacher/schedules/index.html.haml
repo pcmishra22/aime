@@ -1,0 +1,26 @@
+.container
+	.row
+		.col-lg-12
+			%h2{:class=>'page-header'} Schedules
+		.col-lg-12.page-header
+			.col-md-3
+				%strong Topic
+			.col-md-3
+				%strong Start Time
+			.col-md-3
+				%strong End Time
+			.col-md-3
+				%strong Action
+
+		- @schedule.each do |schedule|	
+			.row
+				.col-md-3.m-t-10
+					= schedule.topic
+				.col-md-3.m-t-10
+					= schedule.startdate.strftime("%d-%m-%Y ")
+					= schedule.starttime.strftime("%H:%M")
+				.col-md-3.m-t-10
+					= schedule.enddate.strftime("%d-%m-%Y ")
+					= schedule.endtime.strftime("%H:%M")
+				.col-md-3.m-t-10
+					= link_to "Edit" ,edit_teacher_schedule_path(schedule)
