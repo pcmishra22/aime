@@ -12,11 +12,11 @@
 			.form-group
 				.form-inputs.form-inline
 					= f.label :startdate,"Start Date"
-					= f.input :startdate, :placeholder => "YYYY-MM-DD", :input_html => {:class => "form-control dateField datepicker date-picker"}, :label => false,as: :date
+					= f.input :startdate, :placeholder => "YYYY-MM-DD", :input_html => {:class => "form-control dateField datepicker date-picker"}, :label => false,as: :string
 			.form-group
 				.form-inputs.form-inline
 					= f.label :enddate,"End Date"
-					= f.input :enddate, :placeholder => "YYYY-MM-DD", :input_html => {:class => "form-control dateField datepicker date-picker"}, :label => false,as: :date
+					= f.input :enddate, :placeholder => "YYYY-MM-DD", :input_html => {:class => "form-control dateField datepicker date-picker"}, :label => false,as: :string
 			.form-group
 				.form-inputs.form-inline
 					= f.label :starttime,"Course Start Time"
@@ -24,14 +24,9 @@
 
 			.form-group
 				.form-inputs.form-inline
-					= f.label :endtime,"Course Start Time"
+					= f.label :endtime,"Course End Time"
 					= f.input :endtime, :input_html => {:class => "form-control"}, :label => false,as: :time
 
 			.form-actions.profile-input
 				= f.button :submit, "Submit",:class=>'btn btn-primary'
 				= link_to "Cancel" ,teacher_courses_path,:class=>'btn btn-primary'
-- content_for(:custom_javascripts) do
-	:javascript
-		$(function (){
-			$('.dateField').datepicker({ dateFormat: 'D, yy M dd',startDate: new Date() });
-		});
