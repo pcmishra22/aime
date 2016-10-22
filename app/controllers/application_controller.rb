@@ -14,7 +14,11 @@ class ApplicationController < ActionController::Base
   end
 
   def layout
-    @layout = current_user.type.downcase unless current_user || ""
+    if current_user
+      @layout = current_user.type.downcase
+    else
+      @layout = "application"
+    end
   end
 
   def authorize
