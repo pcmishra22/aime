@@ -1,4 +1,9 @@
 class UsersController < ApplicationController
+  before_action :authorize, only:[:index]
+  layout :layout, only:[:index]
+  def index
+  	@users = User.all
+  end
   def new
   	@user = User.new
   end

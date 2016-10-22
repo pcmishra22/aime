@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   root to: 'visitors#index'
 
-  resources :users , only: [:new,:create]
+  resources :users , only: [:index,:new,:create]
   #routing for users module
   devise_for :users
 
