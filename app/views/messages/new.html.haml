@@ -5,7 +5,7 @@
 		.col-md-8
 			.messageBlock
 			.form-group.sendMessageForm
-				= f.input :text , input_html:{type:"text",class:"messagePost form-control",name:"messagePost",id:"messagePost",placeholder:"Add a comment"},label:false
+				= f.input :text , input_html:{type:"text",class:"messagePost form-control",name:"messagePost",id:"messagePost",placeholder:"Send Message"},label:false
 				.hide.error.pull-left{:id=>"message_err"}
 				%br
 				=f.hidden_field :type,value:params[:type],id:"msgtype"
