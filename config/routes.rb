@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'messages/index'
-
   get 'pages/about'
 
   get 'pages/aimesays'
@@ -25,7 +23,9 @@ Rails.application.routes.draw do
     resources :profiles , only: [:edit,:update,:upload_file,:social_update]
 
   end
-
+  
+  get '/messages/new/:type/:mid', to: 'messages#new'
+  resources :messages
 
   namespace :teacher do
     post '/profiles/upload_file'

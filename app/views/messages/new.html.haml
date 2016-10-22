@@ -1,0 +1,14 @@
+= simple_form_for(@messages) do |f|
+	.col-md-12
+		.col-md-4
+			%h4 Inbox
+		.col-md-8
+			.messageBlock
+			.form-group.sendMessageForm
+				= f.input :text , input_html:{type:"text",class:"messagePost form-control",name:"messagePost",id:"messagePost",placeholder:"Add a comment"},label:false
+				.hide.error.pull-left{:id=>"message_err"}
+				%br
+				=f.hidden_field :type,value:params[:type],id:"msgtype"
+				=f.hidden_field :mid,value:params[:mid],id:"mid"
+				= f.button :submit, "Send",:class=>'btn btn-primary sendMessage m-t-10',:id=>"sendMessage"
+				
