@@ -1,9 +1,20 @@
 = simple_form_for(@messages) do |f|
 	.col-md-12
+
 		.col-md-4
 			%h4 Inbox
-		.col-md-8
+		.col-md-4
+			.page-header
+				= image_tag ("#{ @reciever_detail.profile_photo || ('defaultm.png')}"),class:"img-responsive", height:"100px",width:"100px"
+				.h4 #{@reciever_detail.first_name } #{@reciever_detail.last_name }
 			.messageBlock
+				- @msg_list.each do |msgs|
+					.clearfix.m-t-10
+						-if @user_id == msgs.user_id
+							.pull-right #{msgs.text}
+						-else
+							#{msgs.text}
+
 			.form-group.sendMessageForm
 				= f.input :text , input_html:{type:"text",class:"messagePost form-control",name:"messagePost",id:"messagePost",placeholder:"Send Message"},label:false
 				.hide.error.pull-left{:id=>"message_err"}
@@ -11,4 +22,4 @@
 				=f.hidden_field :type,value:params[:type],id:"msgtype"
 				=f.hidden_field :mid,value:params[:mid],id:"mid"
 				= f.button :submit, "Send",:class=>'btn btn-primary sendMessage m-t-10',:id=>"sendMessage"
-				
+		.col-md-4
