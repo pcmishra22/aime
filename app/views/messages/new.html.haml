@@ -5,10 +5,11 @@
 			%h4 Inbox
 		.col-md-4
 			.page-header
-				.h4 hi
+				= image_tag ("#{ @reciever_detail.profile_photo || ('defaultm.png')}"),class:"img-responsive", height:"100px",width:"100px"
+				.h4 #{@reciever_detail.first_name } #{@reciever_detail.last_name }
 			.messageBlock
 				- @msg_list.each do |msgs|
-					.clearfix
+					.clearfix.m-t-10
 						-if @user_id == msgs.user_id
 							.pull-right #{msgs.text}
 						-else

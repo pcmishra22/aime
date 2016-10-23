@@ -10,12 +10,24 @@ class MessagesController < ApplicationController
 
   def new
     @user_id = current_user.id
-    if(params[:type] == "user")
-      @msg_list = Message.getMessages(@user_id,params[:mid],"user")
+    if params[:type] == "user"
+      @rid = params[:mid]
+      @parent = Message.get_parent(@user_id,@rid)
+      @msg_list = Message.getMessages(@parent)
   	else
-      @msg_list = Message.getMessages(params[:mid])
+      @parent = Message.find(params[:mid])
+
+      if @parent.user_id == @user_id
+        @rid = @parent.recipient_user_id
+      elsif @parent.recipient_user_id == @user_id
+        @rid = @parent.user_id
+      else
+        redirect_to users_path
+      end
+      
+      @msg_list = Message.getMessages(@parent)
     end
-    puts @msg_list[0]
+    @reciever_detail = User.find(@rid)
     @messages = Message.new
   end
 
