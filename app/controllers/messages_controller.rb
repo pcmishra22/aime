@@ -9,8 +9,14 @@ class MessagesController < ApplicationController
   end
 
   def new
-  	#@parent = Message.get_parent(params[:id],current_user.id)
-  	@messages = Message.new
+    @user_id = current_user.id
+    if(params[:type] == "user")
+      @msg_list = Message.getMessages(@user_id,params[:mid],"user")
+  	else
+      @msg_list = Message.getMessages(params[:mid])
+    end
+    puts @msg_list[0]
+    @messages = Message.new
   end
 
   def create
