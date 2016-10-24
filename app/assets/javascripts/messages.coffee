@@ -29,7 +29,7 @@ sendMessage = () ->
 		dataType: "json"
 		success: (response, textStatus, jqXHR) ->	
 			if response.status is 1				
-				$( ".messageBlock" ).append( "<div class='pull-right m-t-10'>" + response.messageBlock + "</div>")
+				$( ".messageBlock" ).append( "<div class='clearfix m-t-10'><div class='pull-right'>" + response.messageBlock + "</div></div>")
 			else
 				alert("123")
 		error: (response, textStatus, jqXHR) ->
