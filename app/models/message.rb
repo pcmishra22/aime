@@ -6,7 +6,7 @@ class Message < ActiveRecord::Base
 	end
 	def self.getMessages(parent)
 		if parent != nil
-			Message.where('id= ? OR parent_message_id= ?',parent.id,parent.id)
+			Message.where('id= ? OR parent_message_id= ?',parent.id,parent.id).order("id asc")
 		else
 			nil
 		end
@@ -22,8 +22,6 @@ class Message < ActiveRecord::Base
 		
 	end	
 	def self.setStatusRead(user_id,rid)
-		puts user_id
-		puts rid
 		Message.where(:recipient_user_id=>user_id,:user_id=>rid).update_all(:is_read=>true)
 	end
 
