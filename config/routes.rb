@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   end
   
   get '/messages/new/:type/:mid', to: 'messages#new'
+  get '/messages/:box', to: 'messages#index'
   resources :messages
 
   namespace :teacher do
