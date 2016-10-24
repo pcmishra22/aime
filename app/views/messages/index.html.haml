@@ -1,2 +1,16 @@
-%h1 Messages#index
-%p Find me in app/views/messages/index.html.haml
+.container
+	.row
+		.col-md-12		
+			.col-md-4
+				= render 'message_links'
+			.col-md-4
+				.page-header.uc-first 
+					%h2 #{@box}
+				-if @msg_list != nil
+					.clearfix.m-t-10
+						- @msg_list.each do |msgs|
+							.clearfix.m-t-10
+								%h4 
+									=link_to "#{msgs.first_name}  #{msgs.last_name}", "/messages/new/thread/#{msgs.parent_message_id || msgs.mid}"
+								#{msgs.text}
+			.col-md-4

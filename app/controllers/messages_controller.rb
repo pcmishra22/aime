@@ -5,7 +5,11 @@ class MessagesController < ApplicationController
   layout :layout
 
   def index
-  	@box = params[:box] || 'inbox'
+    @user_id = current_user.id
+  	@box = params[:format] || 'inbox'
+
+    @msg_list = Message.getAllMessages(@user_id,@box)
+   
   end
 
   def new
@@ -27,6 +31,7 @@ class MessagesController < ApplicationController
       
       @msg_list = Message.getMessages(@parent)
     end
+    Message.setStatusRead(@user_id,@rid)
     @reciever_detail = User.find(@rid)
     @messages = Message.new
   end

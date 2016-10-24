@@ -4,15 +4,25 @@ html{
 .content-wrapper{
   min-height: 450px;
 }
-.uppercase{
-    text-transform:uppercase;
-}
+
 .error_notification{
 	color:red;
 }
 .error{
 	color:red;
 }
+
+
+
+
+.uppercase{
+    text-transform:uppercase;
+}
+.uc-first { 
+	text-transform: capitalize; 
+}
+
+
 
 .thumb{
 	margin:30px;

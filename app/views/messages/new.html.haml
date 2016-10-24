@@ -2,9 +2,8 @@
 	.row
 		= simple_form_for(@messages) do |f|
 			.col-md-12
-
 				.col-md-4
-					%h4 Inbox
+					= render 'message_links'
 				.col-md-4
 					.page-header
 						= image_tag ("#{ @reciever_detail.profile_photo || ('defaultm.png')}"),class:"img-responsive", height:"100px",width:"100px"
