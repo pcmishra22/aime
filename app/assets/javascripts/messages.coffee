@@ -31,12 +31,15 @@ sendMessage = () ->
 			if response.status is 1				
 				$( ".messageBlock" ).append( "<div class='clearfix m-t-10'><div class='pull-right'>" + response.messageBlock + "</div></div>")
 			else
-				alert("123")
+				messagePost.val(messagePostVal);
+				msgError.html("Message not sent.");
+				msgError.removeClass("hide");
 		error: (response, textStatus, jqXHR) ->
 			messagePost.val(messagePostVal);
-			msgError.html("Comment is not Added.");
+			msgError.html("Message not sent.");
 			msgError.removeClass("hide");	
-		complete: ->			
+		complete: ->	
+			messagePost.focus()		
 			$(".sendMessageForm :input").prop("disabled", false);
 			
 

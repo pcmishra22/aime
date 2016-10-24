@@ -1,6 +1,7 @@
 class Message < ActiveRecord::Base
 	belongs_to :user
 	before_save :validateMessage
+	after_save :setCurrentText
 	def self.get_parent(user_id,reciever_id)
 		@message_parent = Message.where('(user_id= ? AND recipient_user_id= ? AND parent_message_id = ? ) OR (user_id= ? AND recipient_user_id= ? AND parent_message_id = ? )', user_id, reciever_id, 0, reciever_id, user_id, 0).order(id: :desc).first
 	end
@@ -13,11 +14,11 @@ class Message < ActiveRecord::Base
 	end
 	def self.getAllMessages(user_id,box)
 		if box == 'unread'
-			Message.select('DISTINCT ON (user_id) *,messages.id as mid').where('recipient_user_id = ? AND is_read = ?',user_id,false).joins("LEFT JOIN users u ON messages.user_id = u.id")
+			Message.select('messages.id as mid,*').where('recipient_user_id = ? AND is_read = ? AND parent_message_id = ?',user_id,false,0).joins("LEFT JOIN users u ON messages.user_id = u.id")
 		elsif box == 'sent'
-			Message.select('DISTINCT ON (recipient_user_id) *,messages.id as mid').where('user_id = ?',user_id).joins("LEFT JOIN users u ON messages.recipient_user_id = u.id")
+			Message.select('messages.id as mid,*').where('parent_message_id = ?',0).order("messages.id desc").joins("LEFT JOIN users u ON messages.recipient_user_id = u.id")
 		else
-			Message.select('DISTINCT ON (user_id) *,messages.id as mid').where('recipient_user_id = ?',user_id).joins("LEFT JOIN users u ON messages.user_id = u.id")
+			Message.select('messages.id as mid,*').where('recipient_user_id = ? AND parent_message_id = ?',user_id,0).joins("LEFT JOIN users u ON messages.user_id = u.id")
 		end
 		
 	end	
@@ -27,6 +28,9 @@ class Message < ActiveRecord::Base
 
 	private
 	def validateMessage
+		if(self.user_id == self.recipient_user_id)
+			return false
+		end
 		if self.parent_message_id == 0
 			@parent = Message.get_parent(self.user_id,self.recipient_user_id)
 			if @parent != nil
@@ -40,6 +44,15 @@ class Message < ActiveRecord::Base
 			if !(@parent.user_id == self.user_id || @parent.user_id == self.recipient_user_id)
 				false
 			end
+		end
+	end
+
+	def setCurrentText
+		if(self.parent_message_id == 0)
+			self.update_columns(:current_text=>text)
+		else
+			@parent = Message.find(self.parent_message_id)
+			@parent.update_columns(:current_text=>text)
 		end
 	end
 end

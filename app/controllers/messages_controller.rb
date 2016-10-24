@@ -15,7 +15,7 @@ class MessagesController < ApplicationController
   def new
     @user_id = current_user.id
     if params[:type] == "user"
-      @rid = params[:mid]
+      @rid = params[:mid].to_i
       @parent = Message.get_parent(@user_id,@rid)
       @msg_list = Message.getMessages(@parent)
   	else
@@ -23,20 +23,24 @@ class MessagesController < ApplicationController
 
       if @parent.user_id == @user_id
         @rid = @parent.recipient_user_id
-      elsif @parent.recipient_user_id == @user_id
-        @rid = @parent.user_id
       else
-        redirect_to users_path
-      end
-      
+        @rid = @parent.user_id
+      end      
       @msg_list = Message.getMessages(@parent)
     end
+
+    if (@user_id == @rid)
+      redirect_to messages_path
+    end
+
     Message.setStatusRead(@user_id,@rid)
     @reciever_detail = User.find(@rid)
     @messages = Message.new
   end
 
   def create
+    @flag = true
+    @user_id = current_user.id
   	@messages = Message.new
   	if(params[:type] == "user")
   		@parent_message_id = 0
@@ -44,25 +48,29 @@ class MessagesController < ApplicationController
   	else
   		@parent_message_id = params[:messageRId]
   		@parent = Message.find(@parent_message_id)
-  		if(@parent.user_id == current_user.id)
+
+  		if(@parent.user_id == @user_id)
   			@recipient_user_id = @parent.recipient_user_id
-  		else
+  		else @parent.recipient_user_id == @user_id
   			@recipient_user_id = @parent.user_id
-  		end
+      end
   	end
 
-  	@messages.user_id = current_user.id
-  	@messages.recipient_user_id = @recipient_user_id
-  	@messages.text = params[:message]
-  	@messages.parent_message_id = @parent_message_id
-  	if @messages.save
-  		@message = {:status=>1,:messageBlock=>params[:message],:msg=>""}
-  	else
-  		@message = {:status=>1,:messageBlock=>params[:message],:msg=>"Message is not added."}
-  	end
+    if @flag === true
+      @messages.user_id = @user_id
+      @messages.recipient_user_id = @recipient_user_id
+      @messages.text = params[:message]
+      @messages.parent_message_id = @parent_message_id
+      if @messages.save
+        @message = {:status=>1,:messageBlock=>params[:message],:msg=>""}
+      else
+        @message = {:status=>2,:messageBlock=>params[:message],:msg=>"Message not sent."}
+      end
+    end
+  	
   	respond_to do |format|
-	  format.html
-	  format.json { render json: @message}
-	end
+  	  format.html
+  	  format.json { render json: @message}
+  	end
   end
 end
