@@ -1,31 +1,32 @@
-.col-lg-12.col-md-12.col-xm-12.col-sm-12.Sign-up-box
-	.text-center
-		%h2{:class=>"signup"} Log in
-		= image_tag("trim.png")
-	.clearfix.rest.padding30
-		.col-sm-12.colums
-			= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :role => 'form',:class=>"padding15 text-center"}) do |f|
-				= devise_error_messages!
+.col-lg-12.col-md-12.col-xm-12.col-sm-12.Sign-up-box.clearfix
+	.col-lg-12.col-md-12.col-xm-12.col-sm-12.clearfix
+		.box.clearfix
+			%ul
+				%li{class:"type"}
+					=link_to "Sign Up",new_user_path,class:"pin"
+				%li{class:"type"}
+					=link_to "Login",new_user_session_path,class:"pin activee"
+			%h6{class:"free clearfix"} Login Fast
+			.col-sm-12.no-padding
+				= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :role => 'form',:class=>""}) do |f|
+					= devise_error_messages!
 
-				.form-group.has-feedback
-					= f.label :email,:class=>"sr-only control-label"
-					= f.email_field :email, :autofocus => true, class: 'form-control input-lg usernamee',placeholder:"Email"
+					.form-group
+						= f.label :email,"Email:"
+						= f.email_field :email, :autofocus => true, class: 'form-control',placeholder:"Enter email*"
 
-				.form-group.has-feedback
-					= f.label :password,:class=>"sr-only control-label"
-					= f.password_field :password, class: 'form-control  input-lg usernamee' ,:title=>"Password must contain at least 6 characters, including UPPER/lowercase and numbers" ,:required=>"", :onchange=>"this.setCustomValidity(this.validity.patternMismatch ? this.title : ''); if(this.checkValidity()) form.pwd2.pattern = this.value",:placeholder=>"Password" 
+					.form-group.has-feedback
+						= f.label :password,"Password:"
+						= f.password_field :password, class: 'form-control',:placeholder=>"Enter password*" 
 
-				= f.submit 'Log in', :class => 'btn btn-block btn-danger btn-lg sign-up'
+					= f.button 'Log in', :class => 'btn btn-default color'
 
-			.padding16.text-center
-				%span{:class=>"text-white"} Don't have an account?
-				%p{class:"lead"} 
-					= link_to "Sign up now for free", new_user_path,:class=>"text-danger"
-				- if devise_mapping.recoverable?
-					%span{class:"text-white"} Forgot your password?
-					%p{class:"text-danger lead"}
-						= link_to "Remind password?", new_password_path(resource_name),:class=>"text-danger"
+				.text-center
+					- if devise_mapping.recoverable?
+						%span{class:"text-white"} Forgot your password?
+						%p{class:"text-danger lead"}
+							= link_to "Remind password?", new_password_path(resource_name),:class=>"text-danger"
 
-				-#if devise_mapping.rememberable?
-					-#.checkbox
-						-#= f.check_box :remember_me
+					-#if devise_mapping.rememberable?
+						-#.checkbox
+							-#= f.check_box :remember_me
