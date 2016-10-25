@@ -1,5 +1,10 @@
-.col-lg-12.col-md-12.col-xm-12.col-sm-12.Sign-up-box
-	.text-center
-		%h2{:class=>'signup'} Sign Up
-		= image_tag("trim.png")
-	= render 'form'
+.col-lg-12.col-md-12.col-xm-12.col-sm-12.Sign-up-box.clearfix
+	.col-lg-12.col-md-12.col-xm-12.col-sm-12.clearfix
+		.box.clearfix
+			%ul
+				%li{class:"type"}
+					=link_to "Sign Up",new_user_path,class:"pin activee"
+				%li{class:"type"}
+					=link_to "Login",new_user_session_path,class:"pin"
+			%h6{class:"free clearfix"} Sign Up For Free
+			= render 'form'

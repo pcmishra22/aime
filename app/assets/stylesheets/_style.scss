@@ -1,3 +1,25 @@
+
+
+/*----OLD Delete---*/
+
+.container {
+
+    #background-color: black;
+    padding: 0;
+}
+.body-wrapper{
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    min-height: 450px;
+}
+.masthead{
+    padding-top: 10px;
+    background-color: #191919;
+    height: 80px;
+}
+
+
 html{
   height:100%;
 }
@@ -13,6 +35,14 @@ html{
 }
 
 
+/* END Delete */
+
+
+/*-------- Code Relation *---------*/
+
+abbr[title="required"] {
+  display: none;
+}
 
 
 .uppercase{
