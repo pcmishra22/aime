@@ -18,7 +18,7 @@ class Message < ActiveRecord::Base
 		elsif box == 'sent'
 			Message.select('messages.id as mid,*').where('parent_message_id = ?',0).order("messages.id desc").joins("LEFT JOIN users u ON messages.recipient_user_id = u.id")
 		else
-			Message.select('messages.id as mid,*').where('(recipient_user_id = ? OR user_id = ?) AND parent_message_id = ?',user_id,user_id,0).joins("LEFT JOIN users u ON messages.user_id = u.id OR messages.recipient_user_id = u.id ").where("u.id != ? ",user_id)
+			Message.select('messages.id as mid,*').where('(recipient_user_id = ? OR user_id = ?) AND parent_message_id = ?',user_id,user_id,0).joins("LEFT JOIN users u ON messages.user_id = u.id OR messages.recipient_user_id = u.id ").where("u.id != ? ",user_id).order("messages.updated_at desc")
 		end
 		
 	end	
@@ -52,7 +52,7 @@ class Message < ActiveRecord::Base
 			self.update_columns(:current_text=>text)
 		else
 			@parent = Message.find(self.parent_message_id)
-			@parent.update_columns(:current_text=>text)
+			@parent.update_columns(:current_text=>self.text,:updated_at=>self.updated_at)
 		end
 	end
 end
