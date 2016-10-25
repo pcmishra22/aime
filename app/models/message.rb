@@ -18,7 +18,7 @@ class Message < ActiveRecord::Base
 		elsif box == 'sent'
 			Message.select('messages.id as mid,*').where('parent_message_id = ?',0).order("messages.id desc").joins("LEFT JOIN users u ON messages.recipient_user_id = u.id")
 		else
-			Message.select('messages.id as mid,*').where('recipient_user_id = ? AND parent_message_id = ?',user_id,0).joins("LEFT JOIN users u ON messages.user_id = u.id")
+			Message.select('messages.id as mid,*').where('(recipient_user_id = ? OR user_id = ?) AND parent_message_id = ?',user_id,user_id,0).joins("LEFT JOIN users u ON messages.user_id = u.id OR messages.recipient_user_id = u.id ").where("u.id != ? ",user_id)
 		end
 		
 	end	
