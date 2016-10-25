@@ -40,6 +40,14 @@ html{
 
 /*-------- Code Relation *---------*/
 
+.text-xs-left {
+    text-align: left !important;
+}
+.text-xs-right {
+    text-align: right !important;
+}
+
+
 abbr[title="required"] {
   display: none;
 }
