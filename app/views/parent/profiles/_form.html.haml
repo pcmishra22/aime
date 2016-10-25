@@ -6,10 +6,7 @@
 		.col-lg-12 
 			.profile-top
 				.col-md-3
-					-if !@parent.profile_photo.blank?
-						%img{ :src => @parent.profile_photo,:height=>150,:width=>150 ,:class=>'profile-pic'}
-					-else
-						.profile-pic
+					= image_tag ("#{ @parent.profile_photo || ('defaultm.png')}"),class:"img-responsive profile-pic", height:"150px",width:"150px"
 					= link_to 'Change Photo', '#', {class: 'btn btn-primary js-admin-fp-button profile-input hide',data: {'fp-apikey': Rails.configuration.filepicker_rails_api_key,'fp-bucket': Rails.configuration.filepicker_rails_store_container,'fp-store-path': 'aime/'}}
 				.col-md-7.profile-info.form-group 
 					.profile-text #{ @parent.first_name } #{ @parent.last_name }

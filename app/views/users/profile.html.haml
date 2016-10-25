@@ -1,0 +1,70 @@
+.container
+	.row
+		.col-lg-12
+			%h2{:class=>'page-header'}Profile
+
+		.row
+			.col-lg-12 
+				.profile-top
+					.col-md-3
+						= image_tag ("#{ @profile.profile_photo || ('defaultm.png')}"),class:"img-responsive profile-pic", height:"150px",width:"150px"
+					.col-md-7.profile-info.form-group 
+						.profile-text #{ @profile.first_name } #{ @profile.last_name }
+						.profile-age #{ (@profile.dob) ? "#{age(@profile.dob)} YEARS OLD" : '' }
+					.col-md-2
+						.edit-profile.profile-text
+							-if(@profile.id != current_user.id) 
+								= link_to "Send Message", "/messages/new/user/#{@profile.id}",:class=>"btn btn-primary"
+
+		.row
+			.col-lg-12
+				.col-md-6
+					%h4{:class=>'page-header'} User Info
+					.uppercase
+						.col-lg-12.profile-fields
+							.col-md-5
+								Birthday
+							.col-md-7.form-group	
+								.profile-text #{ (@profile.dob) ? @profile.dob : '--'}
+						.col-lg-12.profile-fields
+							.col-md-5
+								Languages
+							.col-md-7.form-group	
+								.profile-text #{ (@profile.languages.blank?) ? '--' : @profile.languages }		
+						.col-lg-12.profile-fields
+							.col-md-5
+								Activities
+							.col-md-7.form-group	
+								.profile-text #{ (@profile.activities.blank?) ? '--' : @profile.activities}
+						.col-lg-12.profile-fields
+							.col-md-5
+								Videos
+							.col-md-7.form-group	
+								.profile-text #{ (@profile.videos.blank?) ? '--' :  @profile.videos}
+						.col-lg-12.profile-fields
+							.col-md-5
+								Favourite Class
+							.col-md-7.form-group	
+								.profile-text #{ (@profile.favourite_class) ? @courses[@profile.favourite_class] : '--'}
+						.col-lg-12.profile-fields
+							.col-md-5
+								Study Groups
+							.col-md-7.form-group	
+								.profile-text #{ (@profile.study_groups.blank?) ? '--' : @profile.study_groups}
+						.col-lg-12.profile-fields
+							.col-md-5
+								Awards
+							.col-md-7.form-group    	
+								.profile-text #{ (@profile.awards.blank?) ? '--' :  @profile.awards }
+				.col-md-6
+					%h4{:class=>'page-header'} Classmates
+-if(!params[:commit].blank? )
+- content_for (:custom_javascripts) 
+	:javascript
+		update_file = 1
+
+
+- content_for(:custom_javascripts) do
+	:javascript
+		upload_path = "/student/profiles/upload_file";
+	= render 'layouts/filepicker_lib'

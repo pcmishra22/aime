@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :authorize, only:[:index]
-  layout :layout, only:[:index]
+  before_action :authorize, only:[:index,:profile]
+  layout :layout, only:[:index,:profile]
   def index
   	@users = User.all
   end
@@ -23,6 +23,11 @@ class UsersController < ApplicationController
 	else	 
 	 render :new
 	end
+  end
+
+  def profile
+  	@courses = {1=>"Science",2=>"Math"}
+  	@profile = User.find(params[:profile_id])
   end
 
   private

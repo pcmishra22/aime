@@ -1,4 +1,5 @@
 class PagesController < ApplicationController
+  layout :layout
   def about
   end
 

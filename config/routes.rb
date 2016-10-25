@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   root to: 'visitors#index'
 
+  get '/users/profile/:profile_id', to: 'users#profile'
   resources :users , only: [:index,:new,:create]
   #routing for users module
   devise_for :users
