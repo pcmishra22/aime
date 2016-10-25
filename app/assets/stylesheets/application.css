@@ -106,7 +106,7 @@ li{margin:0 !important; padding:0 !important;}
 
 /* Declare heights because of positioning of img element */
 .carousel-item {
-  height: 50rem;
+  height: 32rem;
   background-color: #777;
 }
 .carousel-item > img {
@@ -202,7 +202,7 @@ ul.foot li a:hover{ color:grey; }
 .imege{margin: 0 auto;
     width: 1054px;}   
 .more:hover{text-decoration:none; opacity:1; color: #00AEEF;}
-.lien{line-height:20px;}
+.lien{line-height:62px;}
 .bg:hover{background-color: #507070 !important;}
 .mg:hover{background-color:#131B1B !important;}
 /*-------------------Sign up page------------------*/
@@ -246,7 +246,7 @@ ul.foot li a:hover{ color:grey; }
 .box{background-color:#24303c;     padding: 38px 30px !important; width:40%; margin:0 auto; }
 .pin{background-color: #435259;
     color: #fff;
-    padding: 9px 72px;
+    padding: 9px 71px;
     font-size: 13px; display:inline-block;}
 .pin:hover{background-color:#1ab188; color: #fff; text-decoration:none; transition:all 0.5s ease; }
 .activee{background-color:#1ab188; color: #fff; text-decoration:none; transition:all 0.5s ease;}
