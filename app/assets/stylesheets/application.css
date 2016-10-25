@@ -26,7 +26,7 @@ div{margin:0; padding:0 !important;}
     line-height: 104px;
     padding-bottom: 48px;
     text-decoration: none;
-    margin: -2px; background-color:transparent !important;}
+    background-color:transparent !important;}
 .navigation a:hover{background-color:grey !important; color:#000 !important;} 
 .border{border-right:1px solid grey;}
 .navigation{border-bottom:1px solid #fff;}
@@ -140,8 +140,8 @@ ul.foot{BACKGROUND-COLOR: #242323 !important;
     padding-top: 8px;
     padding-bottom: 3px;}
 ul.foot li a:hover{ color:grey; }
-.aimse{font-size:22px !important; color:#039BD4 !important; padding-left: 64px !important;
-    padding-right: 64px !important; border:hidden !important; }
+.aimse{font-size:22px !important; color:#039BD4 !important; padding-left: 40px !important;
+    padding-right: 40px !important; border:hidden !important; }
 .dropdown a:hover {
     background-color: #ddd; padding-right:56px!important;
 }
