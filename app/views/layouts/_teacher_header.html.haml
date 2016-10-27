@@ -1,9 +1,10 @@
-%ul.nav.nav-pills.pull-right
-  %li= link_to "SCHEDULE", teacher_dashboard_index_path
-  %li= link_to "CLASSROOM", teacher_dashboard_index_path
+%ul.columns.pull-right
+  -#%li= link_to "Home", teacher_dashboard_index_path
+  -#%li= link_to "SCHEDULE", teacher_dashboard_index_path
+  -#%li= link_to "CLASSROOM", teacher_dashboard_index_path
   %li= link_to "COURSES", teacher_courses_path
-  %li= link_to "LIBRARY", teacher_dashboard_index_path
-  %li= link_to "RESEARCH", teacher_dashboard_index_path
-  %li= link_to "REWARD", teacher_dashboard_index_path
+  -#%li= link_to "LIBRARY", teacher_dashboard_index_path
+  -#%li= link_to "RESEARCH", teacher_dashboard_index_path
+  -#%li= link_to "REWARD", teacher_dashboard_index_path
   %li= link_to "SOCIAL", edit_teacher_profile_path(current_user.id)
   %li= link_to "Sign out", destroy_user_session_path, :method => :delete

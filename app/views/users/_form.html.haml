@@ -18,20 +18,20 @@
       = f.input :password_confirmation,placeholder:"Confirm Password*" ,:input_html=>{ :class=>'form-control' }
     
     %ul{class:"radio"}
-      %li{class:"list-radio"}
-        =f.label :type, "Teacher", :value => "Teacher"
+      %li{class:"list-radio"}        
         =f.radio_button :type,"Teacher",:checked => true
+        =f.label :type, "Teacher", :value => "Teacher"
         .check
           
       %li{class:"list-radio"}
-        =f.label :type, "Student", :value => "Student"
         =f.radio_button :type,"Student",:checked => false
+        =f.label :type, "Student", :value => "Student"
         .check
           .inside
 
-      %li{class:"list-radio"}
-        =f.label :type, "Parent", :value => "Parent"
+      %li{class:"list-radio"}        
         =f.radio_button :type,"Parent",:checked => false
+        =f.label :type, "Parent", :value => "Parent"
         .check
           .inside
 
