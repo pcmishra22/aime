@@ -12,21 +12,21 @@
 	Mail
 
 
-.modal.fade.in{:id=>'social_links',:role=>'dialog'}
-	.modal-dialog.modal-sm
+.modal.fade{:id=>'social_links'}
+	.modal-dialog{role:"document"}
 		.modal-content
 			.modal-header
-				%button.close{:'data-dismiss'=>"modal"}
-					Close
-				.modal-title
+				%button.close{:'data-dismiss'=>"modal",:"aria-label"=>"Close"}
+					%span{:"aria-hidden"=>"true"}
+						&times; 
+				%h4.modal-title
 			.modal-body
-				%input{:type=>"text",:name=>"url",:id=>"url",:value=>""}
-				%input{:type=>"hidden",:name=>"social_type",:id=>"social_type",:value=>""}
+				%p.m-t-10
+					%input{:type=>"text",:name=>"url",:id=>"url",:value=>"",placeholder:"Enter URL"}
+					%input{:type=>"hidden",:name=>"social_type",:id=>"social_type",:value=>""}
 			.modal-footer
-				%a.btn.btn-default{:href=>"javascript:;",:id=>"social_form_submit"}
-					Submit
-				%button.btn.btn-default{:'data-dismiss'=>"modal"}
-					Cancel
+				%button.btn.btn-secondary{:'data-dismiss'=>"modal"} Cancel
+				%button.btn.btn-primary{type:"button",:id=>"social_form_submit"} Submit
 
 
 - content_for(:custom_javascripts) do
