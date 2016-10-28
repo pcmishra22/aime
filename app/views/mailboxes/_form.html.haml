@@ -1,6 +1,14 @@
-.col-md-6
+.col-md-8
 	= simple_form_for(@mailbox) do |f|
 		.form-group
 			=f.input :to_email,:placeholder=>"Mail To",input_html:{:class=>'form-control',:required=>true}
 		.form-group
-			=f.input :end_date,:placeholder=>"End Date",input_html:{:class=>'form-control dateTimeFields'},as: :string
+			=f.input :end_date,:placeholder=>"End Date",input_html:{:class=>'form-control dateField'},as: :string
+		.form-group
+			=f.input :subject,:placeholder=>"Subject",input_html:{:class=>'form-control'}
+		.form-group
+			=f.input :topics,:placeholder=>"Topic",input_html:{:class=>'form-control'}
+		.form-group
+			=f.input :message,:placeholder=>"Message",input_html:{:class=>'form-control',type:"textarea"}
+		.form-group
+			= f.button :submit, "Send Mail",:class=>'btn btn-primary m-t-10'
