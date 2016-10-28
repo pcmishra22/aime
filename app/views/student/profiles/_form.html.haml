@@ -1,8 +1,8 @@
-.container.profile-main
+.profile-main
 = simple_form_for(@student ,:url=> url_for(:action=>"update",:controller=>"profiles")) do |f|
 	= f.error_notification
 
-	.row
+	.profilet
 		.col-lg-12 
 			.profile-top
 				.col-md-3
@@ -22,7 +22,7 @@
 					.cancel-profile.profile-input.hide 
 						%a.btn.btn-primary Cancel
 
-	.row
+	.profilet
 		.col-lg-12
 			.col-md-6
 				%h4{:class=>'page-header'} User Info
