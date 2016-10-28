@@ -1,0 +1,6 @@
+.col-md-6
+	= simple_form_for(@mailbox) do |f|
+		.form-group
+			=f.input :to_email,:placeholder=>"Mail To",input_html:{:class=>'form-control',:required=>true}
+		.form-group
+			=f.input :end_date,:placeholder=>"End Date",input_html:{:class=>'form-control dateTimeFields'},as: :string

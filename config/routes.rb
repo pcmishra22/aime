@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   #routing for users module
   devise_for :users
 
+  resources :mailboxes
+
   namespace :student do
     post '/profiles/upload_file'
     post '/profiles/social_update'
