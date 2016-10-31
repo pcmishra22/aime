@@ -1,0 +1,20 @@
+.modal.fade{:id=>'mail-composer'}
+  .modal-dialog{role:"document"}
+    .modal-content
+      .modal-header
+        %button.close{:'data-dismiss'=>"modal",:"aria-label"=>"Close"}
+          %span{:"aria-hidden"=>"true"}
+            &times; 
+        %h4.modal-title
+          Compose
+      .modal-body.col-md-12
+        #show-composer
+      .modal-footer
+          
+
+- content_for (:custom_javascripts) do
+  :javascript
+    $.get( "/mailboxes/new", function( data ) {
+      $("#show-composer").html(data);
+      $('.dateField').datepicker({ dateFormat: 'D, yy M dd',startDate: new Date(),format: 'yyyy-mm-dd' });
+    });

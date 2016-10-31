@@ -1,8 +1,7 @@
 class MailboxesController < ApplicationController
   
   before_filter :authorize
-
-  layout :layout
+  layout false
   
   def new
   	@mailbox = Mailbox.new
