@@ -1,0 +1,26 @@
+= simple_form_for(Mailbox.new) do |f|
+	.col-md-12
+		.col-md-4
+			= render 'mailbox_links'
+		.col-md-4
+			.page-header
+				= image_tag ("#{ @reciever_detail.profile_photo || ('defaultm.png')}"),class:"img-responsive", height:"100px",width:"100px"
+				%strong #{@reciever_detail.first_name } #{@reciever_detail.last_name }
+				%br
+				%h5 #{@parent_mail.subject} -- #{@parent_mail.topics}
+			.messageBlock
+				-if @mails != nil
+					- @mails.each do |mail|
+						.clearfix.m-t-10
+							-if @user_id == mail.mail_from
+								.pull-right #{mail.message}
+							-else
+								#{mail.message}
+			= f.input :parent_id,label:false,input_html:{type:"hidden",value:"#{@parent_mail.id}",id:"parent_id",name:"parent_id"}
+			.form-group.sendMessageForm
+				= f.input :message , input_html:{type:"text",class:"mailPost form-control",name:"mailPost",id:"mailPost",placeholder:"Reply Mail"},label:false
+				.hide.error.pull-left{:id=>"message_err"}
+				%br
+				= f.button :submit, "Reply",:class=>'btn btn-primary sendReply m-t-10',:id=>"sendReply"
+		.col-md-4
+	.clearfix

@@ -1,0 +1,15 @@
+.col-md-12		
+	.col-md-4
+		= render 'mailbox_links'
+	.col-md-4
+		.page-header.uc-first 
+			%h2.uppercase #{@box} MAILS
+		-if @mails != nil
+			.clearfix.m-t-10
+				- @mails.each do |mail|
+					.clearfix.m-t-10
+						%h4 
+							=link_to "#{mail.first_name}  #{mail.last_name}", mailbox_path(mail.mailid)
+						#{mail.subject}
+	.col-md-4
+.clearfix

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161028062119) do
+ActiveRecord::Schema.define(version: 20161031060916) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,15 +27,17 @@ ActiveRecord::Schema.define(version: 20161028062119) do
   add_index "courses", ["teacherid"], name: "index_courses_on_teacherid", using: :btree
 
   create_table "mailboxes", force: :cascade do |t|
-    t.integer  "mail_from",  null: false
-    t.integer  "mail_to",    null: false
-    t.string   "to_email",   null: false
+    t.integer  "mail_from",                  null: false
+    t.integer  "mail_to",                    null: false
+    t.string   "to_email",                   null: false
     t.datetime "end_date"
     t.string   "subject"
     t.string   "topics"
     t.text     "message"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.boolean  "is_read",    default: false
+    t.integer  "parent_id",  default: 0
   end
 
   add_index "mailboxes", ["mail_from"], name: "index_mailboxes_on_mail_from", using: :btree
