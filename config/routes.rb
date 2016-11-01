@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   #routing for users module
   devise_for :users
 
+  post '/createAjaxMail', to: 'mailboxes#createAjaxMail'
   resources :mailboxes
 
   namespace :student do
