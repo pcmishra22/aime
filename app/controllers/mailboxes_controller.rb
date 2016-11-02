@@ -1,10 +1,12 @@
 class MailboxesController < ApplicationController
   
   before_filter :authorize
+  before_action :getInboxCount , only:[:create,:new,:index,:show]
   layout :layout
 
   def index
   	@user_id = current_user.id
+
   	@box = params[:format] || 'inbox'
 
     @mails = Mailbox.getAllMails(@user_id,@box)
@@ -19,8 +21,11 @@ class MailboxesController < ApplicationController
   	@mailbox = Mailbox.new(mailbox_param)
   	@mailbox.mail_from = current_user.id
     
-    @mailbox.message.concat("<br><br>#{params[:file_pic_attached]}")
-  	if @mailbox.save
+    if params[:file_pic_attached]
+      @mailbox.message.concat("<br><br>#{params[:file_pic_attached]}")
+    end
+
+  	if @mailbox.save(context: :create_new)
   		redirect_to mailboxes_path, notice:"Mail Successfully sent."
   	else
   		render :new
@@ -31,18 +36,21 @@ class MailboxesController < ApplicationController
   def show
   	@mailbox = Mailbox.new
   	@parent_mail = Mailbox.find(params[:id])
+    @user_id = current_user.id
+    if @parent_mail.mail_from == @user_id ||  @parent_mail.mail_to == @user_id
+      Mailbox.setStatusRead(@parent_mail.id)
+    	if @parent_mail.mail_from == @user_id
+    		@rid = @parent_mail.mail_to
+    	else
+    		@rid = @parent_mail.mail_from
+    	end
 
-  	@user_id = current_user.id
+    	@reciever_detail = User.find(@rid)
 
-  	if @parent_mail.mail_from == @user_id
-  		@rid = @parent_mail.mail_to
-  	else
-  		@rid = @parent_mail.mail_from
-  	end
-
-  	@reciever_detail = User.find(@rid)
-
-  	@mails = Mailbox.where("id = ? OR parent_id = ?",params[:id],params[:id])
+    	@mails = Mailbox.where("id = ? OR parent_id = ?",params[:id],params[:id])
+    else
+      redirect_to mailboxes_path
+    end
   end
 
   def createAjaxMail
@@ -65,16 +73,15 @@ class MailboxesController < ApplicationController
 			  	@mailbox.mail_from = @user_id
 			  	@mailbox.mail_to = @rid
 			  	@mailbox.to_email = @reciever_detail.email
-			  	@mailbox.end_date = @parent_mail.end_date
-			  	@mailbox.subject = @parent_mail.subject
-			  	@mailbox.topics = @parent_mail.topics
+			  	#@mailbox.end_date = @parent_mail.end_date
+			  	#@mailbox.subject = @parent_mail.subject
+			  	#@mailbox.topics = @parent_mail.topics
 			  	@mailbox.message = params[:message]
 			  	@mailbox.parent_id = @parent_mail.id
 
 			  	if @mailbox.save
         			@response = {:status=>1,:messageBlock=>params[:message],:msg=>""}
       			else
-      				puts @mailbox.errors.messages.inspect
        				@response = {:status=>2,:messageBlock=>params[:message],:msg=>"Message not sent."}
       			end
 
@@ -94,6 +101,10 @@ class MailboxesController < ApplicationController
 
    def mailbox_ajax_param
      params.require(:mailbox).permit(:parent_id,:message)
+   end
+
+   def getInboxCount
+     @mailbox_count = Mailbox.inboxCount(current_user.id)
    end
 
 end

@@ -3,7 +3,9 @@
 %h4
   = link_to "Compose", "javascript:;", :"data-toggle" => "modal", :"data-target" => "#mail-composer"
 %h4 
-  =link_to "Inbox",mailboxes_path("inbox") 
+  =link_to "Inbox",mailboxes_path("inbox")
+  -if @mailbox_count 
+    ( #{@mailbox_count} )
 %h4 
   =link_to "Sent",mailboxes_path("sent")
 
