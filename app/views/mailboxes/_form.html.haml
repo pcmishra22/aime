@@ -11,4 +11,10 @@
 		.form-group
 			=f.input :message,:placeholder=>"Message",input_html:{:class=>'form-control',type:"textarea"}
 		.form-group
+			= link_to 'Attachment', 'javascript:;', {class: 'btn btn-info js-admin-fp-button',data: {'fp-apikey': Rails.configuration.filepicker_rails_api_key,'fp-bucket': Rails.configuration.filepicker_rails_store_container,'fp-store-path': 'aime/'}}
+			.file-stack-file 
+				No File attached
+			.clear-file-pic.hide.btn.btn-small.btn-danger Clear
+			%input{:type=>"hidden",:class=>'form-control',:name=>"file_pic_attached",:id=>"file_pic_attached"}
+		.form-group
 			= f.button :submit, "Send Mail",:class=>'btn btn-primary m-t-10'

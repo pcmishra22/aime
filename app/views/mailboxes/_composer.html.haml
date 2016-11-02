@@ -1,4 +1,4 @@
-.modal.fade{:id=>'mail-composer'}
+.modal.fade.file-picker-parent{:id=>'mail-composer'}
   .modal-dialog{role:"document"}
     .modal-content
       .modal-header
@@ -10,11 +10,14 @@
       .modal-body.col-md-12
         #show-composer
       .modal-footer
-          
+         
 
 - content_for (:custom_javascripts) do
+  = render 'layouts/filepicker_lib'
   :javascript
     $.get( "/mailboxes/new", function( data ) {
       $("#show-composer").html(data);
       $('.dateField').datepicker({ dateFormat: 'D, yy M dd',startDate: new Date(),format: 'yyyy-mm-dd' });
     });
+    upload_path = "/parent/profiles/upload_file";
+  

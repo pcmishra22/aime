@@ -18,6 +18,8 @@ class MailboxesController < ApplicationController
   def create
   	@mailbox = Mailbox.new(mailbox_param)
   	@mailbox.mail_from = current_user.id
+    
+    @mailbox.message.concat("<br><br>#{params[:file_pic_attached]}")
   	if @mailbox.save
   		redirect_to mailboxes_path, notice:"Mail Successfully sent."
   	else
@@ -40,7 +42,7 @@ class MailboxesController < ApplicationController
 
   	@reciever_detail = User.find(@rid)
 
-  	@mails = Mailbox.where("id = ? OR parent_id = ?",params[:id],params[:id]).order("id desc")
+  	@mails = Mailbox.where("id = ? OR parent_id = ?",params[:id],params[:id])
   end
 
   def createAjaxMail
