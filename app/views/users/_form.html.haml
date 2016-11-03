@@ -19,19 +19,19 @@
     
     %ul{class:"radio"}
       %li{class:"list-radio"}        
-        =f.radio_button :type,"Teacher",:checked => true
-        =f.label :type, "Teacher", :value => "Teacher"
+        =f.radio_button :usertype,"2",:checked => true
+        =f.label :usertype, "Teacher", :value => "2"
         .check
           
       %li{class:"list-radio"}
-        =f.radio_button :type,"Student",:checked => false
-        =f.label :type, "Student", :value => "Student"
+        =f.radio_button :usertype,"1",:checked => false
+        =f.label :usertype, "Student", :value => "1"
         .check
           .inside
 
       %li{class:"list-radio"}        
-        =f.radio_button :type,"Parent",:checked => false
-        =f.label :type, "Parent", :value => "Parent"
+        =f.radio_button :usertype,"3",:checked => false
+        =f.label :usertype, "Parent", :value => "3"
         .check
           .inside
 

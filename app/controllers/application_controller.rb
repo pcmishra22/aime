@@ -8,14 +8,14 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     #teacher_dashboard_index_path
-
-    send("#{resource.class.name.try(:downcase)}_dashboard_index_path")
+    session[:u_type] = User.types[params[:user][:type]]
+    send("#{session[:u_type].try(:downcase)}_dashboard_index_path")
 
   end
 
   def layout
-    if current_user
-      @layout = current_user.type.downcase
+    if session[:u_type]
+      @layout = session[:u_type].downcase
     else
       @layout = "application"
     end
@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
 	  devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:first_name,:last_name,:email,:password) }
-    devise_parameter_sanitizer.permit(:sign_in) { |u| u.permit(:email,:password) }
+    devise_parameter_sanitizer.permit(:sign_in) { |u| u.permit(:email,:password,:type) }
     devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:first_name,:last_name,:email,:password,:current_password) }
   end
   

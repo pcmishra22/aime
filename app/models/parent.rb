@@ -1,2 +1,0 @@
-class Parent < User
-end

@@ -14,7 +14,7 @@ class Teacher::ApplicationController < ApplicationController
   private
 
   def authorize_teacher!
-    render "errors/unauthorized", status: 401, layout: false unless current_user.is_teacher?
+    render "errors/unauthorized", status: 401, layout: false unless session[:u_type] == User.types['2']
   end
 
   def set_active_menu
