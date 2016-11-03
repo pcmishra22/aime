@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   has_many :course
   has_many :message
+
+  enum type: { '1' => "Student", '2' => "Teacher", '3' => "Parent" }
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -15,19 +17,4 @@ class User < ActiveRecord::Base
   validates :password, :confirmation => true ,:presence => true, :on => :create
   validates_length_of :password, :in => 6..20, :on => :create
 
-  def is_student?
-    type == "Student"
-  end
-
-  def is_teacher?
-    type == "Teacher"
-  end
-
-  def is_parent?
-    type == "Parent"
-  end
-
-  def is_admin?
-    type == "Admin"
-  end
 end

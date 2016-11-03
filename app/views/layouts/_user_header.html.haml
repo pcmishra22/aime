@@ -1,9 +1,10 @@
 %ul{class:"columns"}
   - if user_signed_in?
+    %li= link_to "Home", root_path
     %li{class:"dropdown"}
       %a{onmouseover:"myFunction()" ,class:"dropbtn differ" ,href:"#"} Profile
       .dropdown-content{id:"myDropdown"}
-        = link_to "Profile", edit_parent_profile_path(current_user.id)
+        = link_to "Dashboard","#{session[:u_type].try(:downcase)}/dashboard"
         = link_to "Sign out", destroy_user_session_path, :method => :delete
   - else
     %li= link_to "Sign in", new_user_session_path

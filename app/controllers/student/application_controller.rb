@@ -17,7 +17,7 @@ class Student::ApplicationController < ApplicationController
     puts "======="
     puts current_user.type
     puts "======"
-    render "errors/unauthorized", status: 401, layout: false unless current_user.is_student?
+    render "errors/unauthorized", status: 401, layout: false unless session[:u_type] == User.types['1']
   end
 
   def set_active_menu

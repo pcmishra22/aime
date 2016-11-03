@@ -14,7 +14,7 @@ class Parent::ApplicationController < ApplicationController
   private
 
   def authorize_parents!
-    render "errors/unauthorized", status: 401, layout: false unless current_user.is_parent?
+    render "errors/unauthorized", status: 401, layout: false unless session[:u_type] == User.types['3']
   end
 
   def set_active_menu

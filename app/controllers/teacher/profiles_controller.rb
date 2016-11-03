@@ -2,11 +2,11 @@ class Teacher::ProfilesController < Teacher::ApplicationController
   layout 'teacher'
   helper UsersHelper
   def edit
-  	@teacher = Teacher.find current_user.id
+  	@teacher = User.find current_user.id
   	@courses = {1=>"Science",2=>"Math"}
   end
   def update
-  	@teacher = Teacher.find current_user.id
+  	@teacher = User.find current_user.id
   	if(@teacher.update(update_param))
   		redirect_to edit_teacher_profile_path(current_user.id) , :notice=>'Profile Successfully Updated.'
   	else 
@@ -15,7 +15,7 @@ class Teacher::ProfilesController < Teacher::ApplicationController
   end
   def upload_file
     if( params[:converted] == "true" )
-      @teacher = Teacher.find current_user.id
+      @teacher = User.find current_user.id
       @teacher.profile_photo = params[:url]
       @teacher.save
       redirect_to edit_teacher_profile_path(current_user.id), :notice=>'Profile Photo Updated Successfully Updated.'
@@ -24,7 +24,7 @@ class Teacher::ProfilesController < Teacher::ApplicationController
     end
   end
   def social_update
-    @teacher = Teacher.find current_user.id
+    @teacher = User.find current_user.id
     if (params[:social_type] == "twitter")
       @teacher.twitter = params[:url]
     elsif (params[:social_type] == "facebook")
@@ -44,6 +44,6 @@ class Teacher::ProfilesController < Teacher::ApplicationController
   private
 	#user update allowed param
 	def update_param
-		params.require(:teacher).permit(:first_name,:last_name,:dob,:languages,:activities,:videos,:favourite_class,:awards)
+		params.require(:user).permit(:first_name,:last_name,:dob,:languages,:activities,:videos,:favourite_class,:awards)
 	end
 end

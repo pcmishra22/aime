@@ -2,11 +2,11 @@ class Parent::ProfilesController < Parent::ApplicationController
   layout 'parent'
   helper UsersHelper
   def edit
-  	@parent = Parent.find current_user.id
+  	@parent = User.find current_user.id
   	@courses = {1=>"Science",2=>"Math"}
   end
   def update
-  	@parent = Parent.find current_user.id
+  	@parent = User.find current_user.id
   	if(@parent.update(update_param))
   		redirect_to edit_parent_profile_path(current_user.id) , :notice=>'Profile Successfully Updated.'
   	else 
@@ -15,7 +15,7 @@ class Parent::ProfilesController < Parent::ApplicationController
   end
   def upload_file
     if( params[:converted] == "true" )
-      @parent = Parent.find current_user.id
+      @parent = User.find current_user.id
       @parent.profile_photo = params[:url]
       @parent.save
       redirect_to edit_parent_profile_path(current_user.id), :notice=>'Profile Photo Updated Successfully Updated.'
@@ -24,7 +24,7 @@ class Parent::ProfilesController < Parent::ApplicationController
     end
   end
   def social_update
-    @parent = Parent.find current_user.id
+    @parent = User.find current_user.id
     if (params[:social_type] == "twitter")
       @parent.twitter = params[:url]
     elsif (params[:social_type] == "facebook")
@@ -44,6 +44,6 @@ class Parent::ProfilesController < Parent::ApplicationController
   private
 	#user update allowed param
 	def update_param
-		params.require(:parent).permit(:first_name,:last_name,:dob,:languages)
+		params.require(:user).permit(:first_name,:last_name,:dob,:languages)
 	end
 end
