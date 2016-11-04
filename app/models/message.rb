@@ -1,7 +1,14 @@
 class Message < ActiveRecord::Base
+
+	enum usertype: { '1' => "Student", '2' => "Teacher", '3' => "Parent" }
+
 	belongs_to :user
 	before_save :validateMessage
 	after_save :setCurrentText
+
+	validates :text, :presence => true
+	validates :usertype, :presence => true
+
 	def self.get_parent(user_id,reciever_id)
 		@message_parent = Message.where('(user_id= ? AND recipient_user_id= ? AND parent_message_id = ? ) OR (user_id= ? AND recipient_user_id= ? AND parent_message_id = ? )', user_id, reciever_id, 0, reciever_id, user_id, 0).order(id: :desc).first
 	end

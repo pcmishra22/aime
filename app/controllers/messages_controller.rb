@@ -1,7 +1,6 @@
 class MessagesController < ApplicationController
   
-  before_filter :authorize
-
+  before_filter :authorize , :set_user_type
   layout :layout
 
   def index
@@ -61,6 +60,8 @@ class MessagesController < ApplicationController
       @messages.recipient_user_id = @recipient_user_id
       @messages.text = params[:message]
       @messages.parent_message_id = @parent_message_id
+      
+      @messages.usertype = @usertype
       if @messages.save
         @message = {:status=>1,:messageBlock=>params[:message],:msg=>""}
       else
@@ -73,4 +74,11 @@ class MessagesController < ApplicationController
   	  format.json { render json: @message}
   	end
   end
+  private
+
+  def set_user_type
+    @usertype = session[:u_type]
+  end
+
+
 end
