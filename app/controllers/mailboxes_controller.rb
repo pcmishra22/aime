@@ -1,6 +1,6 @@
 class MailboxesController < ApplicationController
   
-  before_filter :authorize
+  before_filter :authorize , :set_user_type
   before_action :getInboxCount , only:[:create,:new,:index,:show]
   layout :layout
 
@@ -9,7 +9,7 @@ class MailboxesController < ApplicationController
 
   	@box = params[:format] || 'inbox'
 
-    @mails = Mailbox.getAllMails(@user_id,@box)
+    @mails = Mailbox.getAllMails(@user_id,@box,@usertype)
   end
 
   def new
@@ -24,7 +24,7 @@ class MailboxesController < ApplicationController
     if params[:file_pic_attached]
       @mailbox.message.concat("<br><br>#{params[:file_pic_attached]}")
     end
-
+    @mailbox.usertype = @usertype
   	if @mailbox.save(context: :create_new)
   		redirect_to mailboxes_path, notice:"Mail Successfully sent."
   	else
@@ -73,9 +73,7 @@ class MailboxesController < ApplicationController
 			  	@mailbox.mail_from = @user_id
 			  	@mailbox.mail_to = @rid
 			  	@mailbox.to_email = @reciever_detail.email
-			  	#@mailbox.end_date = @parent_mail.end_date
-			  	#@mailbox.subject = @parent_mail.subject
-			  	#@mailbox.topics = @parent_mail.topics
+			  	@mailbox.usertype = @usertype
 			  	@mailbox.message = params[:message]
 			  	@mailbox.parent_id = @parent_mail.id
 
@@ -105,6 +103,10 @@ class MailboxesController < ApplicationController
 
    def getInboxCount
      @mailbox_count = Mailbox.inboxCount(current_user.id)
+   end
+
+   def set_user_type
+    @usertype = session[:u_type]
    end
 
 end

@@ -1,6 +1,6 @@
 class Mailbox < ActiveRecord::Base
 	before_create :recipient_user
-
+	enum usertype: { '1' => "Student", '2' => "Teacher", '3' => "Parent" }
 	validates :to_email, :presence => true
 	validates :end_date, :presence => true , :on => :create_new
 	validates :subject, :presence => true , :on => :create_new
@@ -8,9 +8,9 @@ class Mailbox < ActiveRecord::Base
 	validates :message, :presence => true
 	validates_format_of :to_email,:with => Devise::email_regexp
 
-	def self.getAllMails(user_id,box="")
+	def self.getAllMails(user_id,box="",usertype="")
 		if box == 'sent'
-			Mailbox.select("mailboxes.id as mailid,*").where(:mail_from=>user_id,:parent_id=>0).joins("LEFT JOIN users u ON mailboxes.mail_to = u.id ").order("mailboxes.id desc")
+			Mailbox.select("mailboxes.id as mailid,*").where(:mail_from=>user_id,:usertype=>usertype,:parent_id=>0).joins("LEFT JOIN users u ON mailboxes.mail_to = u.id ").order("mailboxes.id desc")
 		else
 			Mailbox.select("mailboxes.id as mailid,*").where(:mail_to=>user_id,:parent_id=>0).joins("LEFT JOIN users u ON mailboxes.mail_from = u.id ").order("mailboxes.id desc")
 		end
