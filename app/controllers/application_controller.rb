@@ -5,9 +5,6 @@ class ApplicationController < ActionController::Base
 
 
   def after_sign_in_path_for(resource)
-    puts "============="
-    puts params[:user][:type]
-    puts "============="
 
     if params[:user][:type] == 'teacher'
       teacher_dashboard_index_path

@@ -4,15 +4,17 @@ class Teacher::ApplicationController < ApplicationController
   before_action :authenticate_user!
   before_action :authorize_teacher!
 
-  # Override this value to specify the number of elements to display at a time
-  # on index pages. Defaults to 20.
-  def records_per_page
-    params[:per_page] || 20
+  helper_method :current_teacher
+
+  def current_teacher
+    @current_teacher
   end
 
   private
 
-  def authorize_teacher!
-    render "errors/unauthorized", status: 401, layout: false unless session[:u_type] == User.types['2']
+  def authorize_parent!
+    @current_teacher = current_user.teacher
+    redirect_to teacher_profiles_path unless @current_teacher
   end
- end
+
+end
