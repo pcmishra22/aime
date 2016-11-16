@@ -20,19 +20,19 @@
 						= f.password_field :password, class: 'form-control',:placeholder=>"Enter password*" 
 					%ul{class:"radio"}
 						%li{class:"list-radio"}        
-							=f.radio_button :type,"2",:checked => true
-							=f.label :type, "Teacher", :value => "2"
+							=f.radio_button :type,"teacher",:checked => true
+							=f.label :type, "Teacher", :value => "teacher"
 							.check
 
 						%li{class:"list-radio"}
-							=f.radio_button :type,"1",:checked => false
-							=f.label :type, "Student", :value => "1"
+							=f.radio_button :type,"student",:checked => false
+							=f.label :type, "Student", :value => "student"
 							.check
 								.inside
 
 						%li{class:"list-radio"}        
-							=f.radio_button :type,"3",:checked => false
-							=f.label :type, "Parent", :value => "3"
+							=f.radio_button :type,"parent",:checked => false
+							=f.label :type, "Parent", :value => "parent"
 							.check
 								.inside
 

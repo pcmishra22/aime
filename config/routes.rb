@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     post '/profiles/upload_file'
     post '/profiles/social_update'
     resources :dashboard
-    resources :profiles , only: [:edit,:update,:upload_file,:social_update]
+    resources :profiles , only: [:index, :edit,:update,:upload_file,:social_update]
 
   end
   

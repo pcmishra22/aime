@@ -1,6 +1,14 @@
 class Student::ProfilesController < Student::ApplicationController
   layout 'student'
   helper UsersHelper
+
+  skip_before_action :authorize_student!, only: [:index, :new, :create]
+
+  def index
+    render json: current_user.student
+    return
+  end
+
   def edit
   	@student = User.find current_user.id
     @courses = {1=>"Science",2=>"Math"}
