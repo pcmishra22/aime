@@ -2,23 +2,20 @@ class Parent::ApplicationController < ApplicationController
   layout 'parent'
 
   before_action :authenticate_user!
-  before_action :authorize_parents!
-  before_action :set_active_menu
+  before_action :authorize_student!
 
-  # Override this value to specify the number of elements to display at a time
-  # on index pages. Defaults to 20.
-  def records_per_page
-    params[:per_page] || 100
+  helper_method :current_parent
+
+  def current_parent
+    @current_parent
   end
 
   private
 
-  def authorize_parents!
-    render "errors/unauthorized", status: 401, layout: false unless session[:u_type] == User.types['3']
+  def authorize_parent!
+    @current_parent = current_user.parent
+    redirect_to parent_profiles_path unless @current_parent
   end
 
-  def set_active_menu
-    @active_menu = params[:controller].gsub('parent/','')
-  end
 
  end

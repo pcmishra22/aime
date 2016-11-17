@@ -4,7 +4,7 @@
     %li{class:"dropdown"}
       %a{onmouseover:"myFunction()" ,class:"dropbtn differ" ,href:"#"} Profile
       .dropdown-content{id:"myDropdown"}
-        = link_to "Dashboard","#{session[:u_type].try(:downcase)}/dashboard"
+        = link_to "Dashboard","#{session[:u_type].try(:downcase)}/dashboards"
         = link_to "Sign out", destroy_user_session_path, :method => :delete
   - else
     %li= link_to "Sign in", new_user_session_path

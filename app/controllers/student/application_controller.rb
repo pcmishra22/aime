@@ -2,26 +2,19 @@ class Student::ApplicationController < ApplicationController
   layout 'student'
 
   before_action :authenticate_user!
-  before_action :authorize_student!
-  before_action :set_active_menu
+  before_action :authorize_student
 
-  # Override this value to specify the number of elements to display at a time
-  # on index pages. Defaults to 20.
-  def records_per_page
-    params[:per_page] || 100
+  helper_method :current_student
+
+
+  def current_student
+    @current_student
   end
 
   private
 
-  def authorize_student!
-    puts "======="
-    puts current_user.type
-    puts "======"
-    render "errors/unauthorized", status: 401, layout: false unless session[:u_type] == User.types['1']
+  def authorize_student
+    @current_student = current_user.student
+    redirect_to new_student_profile_path unless @current_student
   end
-
-  def set_active_menu
-    @active_menu = params[:controller].gsub('student/','')
-  end
-
- end
+end

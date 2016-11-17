@@ -1,50 +1,58 @@
 class Student::ProfilesController < Student::ApplicationController
   layout 'student'
   helper UsersHelper
+
+  skip_before_action :authorize_student, only: [:new, :create]
+
+  def index
+    render json: current_user.student
+    return
+  end
+
+  def new
+
+    # Student has already their profile created
+    redirect_to edit_student_profile_path if current_student
+
+    @student = Student.new
+  end
+
+  def create
+    @student = Student.new(student_params)
+    @student.user = current_user
+
+
+    respond_to do |format|
+      if @student.save
+        format.html { redirect_to student_profile_path, notice: 'Your student profile created successfully' }
+        format.json { render :show, status: :created, location: @student }
+      else
+        format.html { render :new }
+        format.json { render json: @student.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   def edit
-  	@student = User.find current_user.id
+  	@student = current_student
     @courses = {1=>"Science",2=>"Math"}
   end
 
   def update
-  	@student = User.find current_user.id
-  	if(@student.update(update_param))
-  		redirect_to edit_student_profile_path(current_user.id) , :notice=>'Profile Successfully Updated.'
+  	@student = current_student
+  	if(@student.update(student_params))
+  		redirect_to student_profile_path(current_student) , :notice=>'Profile Successfully Updated.'
   	else 
   		render :edit
   	end
   end
-  def upload_file
-    if( params[:converted] == "true" )
-      @student = User.find current_user.id
-      @student.profile_photo = params[:url]
-      @student.save
-      redirect_to edit_student_profile_path(current_user.id), :notice=>'Profile Photo Updated Successfully Updated.'
-    else
-      redirect_to edit_student_profile_path(current_user.id), :notice=>'Profile Photo is not updated.'
-    end
+
+  def show
+
   end
-  def social_update
-    @student = User.find current_user.id
-    if (params[:social_type] == "twitter")
-      @student.twitter = params[:url]
-    elsif (params[:social_type] == "facebook")
-      @student.facebook = params[:url]
-    elsif (params[:social_type] == "instagram")
-      @student.instagram = params[:url]
-    elsif (params[:social_type] == "google")
-      @student.google = params[:url]
-    elsif (params[:social_type] == "pininterest")
-      @student.pininterest = params[:url]
-    elsif (params[:social_type] == "mailbox")
-      @student.mailbox = params[:url]
-    end
-    @student.save
-    render :json => {:status=>'1',:msg=>"Successfully Updated."}
+
+  def student_params
+    params.require(:student).permit :first_name, :last_name, :profile_photo_url
   end
-  private
-	#user update allowed param
-	def update_param
-		params.require(:user).permit(:first_name,:last_name,:dob,:languages,:activities,:videos,:favourite_class,:study_groups,:awards)
-	end
+
 end

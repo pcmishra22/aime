@@ -21,10 +21,8 @@ Rails.application.routes.draw do
   resources :mailboxes
 
   namespace :student do
-    post '/profiles/upload_file'
-    post '/profiles/social_update'
-    resources :dashboard
-    resources :profiles , only: [:edit,:update,:upload_file,:social_update]
+    resource :dashboard
+    resource :profile
 
   end
   
@@ -33,19 +31,15 @@ Rails.application.routes.draw do
   resources :messages
 
   namespace :teacher do
-    post '/profiles/upload_file'
-    post '/profiles/social_update'
-    resources :dashboard
-    resources :profiles , only: [:edit,:update,:upload_file,:social_update]
+    resource :dashboard
+    resource :profile
     resources :courses
     resources :schedules
   end
 
   namespace :parent do
-    post '/profiles/upload_file'
-    post '/profiles/social_update'
-    resources :dashboard
-    resources :profiles , only: [:edit,:update,:upload_file,:social_update]
+    resource :dashboard
+    resource :profile
   end
 
   namespace :admin do

@@ -2,7 +2,10 @@ class User < ActiveRecord::Base
   has_many :course
   has_many :message
 
-  enum type: { '1' => "Student", '2' => "Teacher", '3' => "Parent" }
+  has_one :student
+  has_one :teacher
+  has_one :parent
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
