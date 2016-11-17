@@ -2,7 +2,7 @@ class Student::ProfilesController < Student::ApplicationController
   layout 'student'
   helper UsersHelper
 
-  skip_before_action :authorize_student, only: [:index, :new, :create]
+  skip_before_action :authorize_student, only: [:new, :create]
 
   def index
     render json: current_user.student
@@ -12,7 +12,7 @@ class Student::ProfilesController < Student::ApplicationController
   def new
 
     # Student has already their profile created
-    redirect_to edit_student_profiles_path if current_student
+    redirect_to edit_student_profile_path if current_student
 
     @student = Student.new
   end
@@ -24,7 +24,7 @@ class Student::ProfilesController < Student::ApplicationController
 
     respond_to do |format|
       if @student.save
-        format.html { redirect_to student_profiles_path, notice: 'Your student profile created successfully' }
+        format.html { redirect_to student_profile_path, notice: 'Your student profile created successfully' }
         format.json { render :show, status: :created, location: @student }
       else
         format.html { render :new }

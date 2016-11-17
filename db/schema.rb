@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161117071526) do
+ActiveRecord::Schema.define(version: 20161117084020) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,9 +61,12 @@ ActiveRecord::Schema.define(version: 20161117071526) do
   add_index "messages", ["user_id"], name: "index_messages_on_user_id", using: :btree
 
   create_table "parents", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.integer  "user_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "profile_photo_url"
   end
 
   add_index "parents", ["user_id"], name: "index_parents_on_user_id", unique: true, using: :btree
@@ -93,9 +96,12 @@ ActiveRecord::Schema.define(version: 20161117071526) do
   add_index "students", ["user_id"], name: "index_students_on_user_id", unique: true, using: :btree
 
   create_table "teachers", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.integer  "user_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "profile_photo_url"
   end
 
   add_index "teachers", ["user_id"], name: "index_teachers_on_user_id", unique: true, using: :btree
