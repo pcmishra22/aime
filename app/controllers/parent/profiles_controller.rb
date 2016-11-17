@@ -1,49 +1,58 @@
 class Parent::ProfilesController < Parent::ApplicationController
   layout 'parent'
-  helper UsersHelper
+
+  skip_before_action :authorize_parent, only: [:new, :create]
+
+  def index
+    render json: current_user.parent
+    return
+  end
+
+  def new
+
+    # Student has already their profile created
+    redirect_to edit_parent_profile_path if current_parent
+
+    @parent = Parent.new
+  end
+
+  def create
+    @parent = Parent.new(parent_params)
+    @parent.user = current_user
+
+
+    respond_to do |format|
+      if @parent.save
+        format.html { redirect_to parent_profile_path, notice: 'Your parent profile created successfully' }
+        format.json { render :show, status: :created, location: @parent }
+      else
+        format.html { render :new }
+        format.json { render json: @parent.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   def edit
-  	@parent = User.find current_user.id
-  	@courses = {1=>"Science",2=>"Math"}
+    @parent = current_parent
+    @courses = {1=>"Science",2=>"Math"}
   end
+
   def update
-  	@parent = User.find current_user.id
-  	if(@parent.update(update_param))
-  		redirect_to edit_parent_profile_path(current_user.id) , :notice=>'Profile Successfully Updated.'
-  	else 
-  		render :edit
-  	end
-  end
-  def upload_file
-    if( params[:converted] == "true" )
-      @parent = User.find current_user.id
-      @parent.profile_photo = params[:url]
-      @parent.save
-      redirect_to edit_parent_profile_path(current_user.id), :notice=>'Profile Photo Updated Successfully Updated.'
+    @parent = current_parent
+    if(@parent.update(parent_params))
+      redirect_to parent_profile_path(current_parent) , :notice=>'Profile Successfully Updated.'
     else
-      redirect_to edit_parent_profile_path(current_user.id), :notice=>'Profile Photo is not updated.'
+      render :edit
     end
   end
-  def social_update
-    @parent = User.find current_user.id
-    if (params[:social_type] == "twitter")
-      @parent.twitter = params[:url]
-    elsif (params[:social_type] == "facebook")
-      @parent.facebook = params[:url]
-    elsif (params[:social_type] == "instagram")
-      @parent.instagram = params[:url]
-    elsif (params[:social_type] == "google")
-      @parent.google = params[:url]
-    elsif (params[:social_type] == "pininterest")
-      @parent.pininterest = params[:url]
-    elsif (params[:social_type] == "mailbox")
-      @parent.mailbox = params[:url]
-    end
-    @parent.save
-    render :json => {:status=>'1',:msg=>"Successfully Updated."}
+
+  def show
+
   end
-  private
-	#user update allowed param
-	def update_param
-		params.require(:user).permit(:first_name,:last_name,:dob,:languages)
-	end
+
+  def parent_params
+    params.require(:parent).permit :first_name, :last_name, :profile_photo_url
+  end
+
+
 end

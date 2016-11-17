@@ -1,59 +1,21 @@
-.profile-main
-= simple_form_for(@parent ,:url=> url_for(:action=>"update",:controller=>"profiles")) do |f|
-	= f.error_notification
+.container
+  .row
+    = simple_form_for @parent, :url =>parent_profile_path  do |f|
+      .col-lg-9.col-md-9.col-sm-9.col-xs-9
+        .input_row.form-group
+          label First Name:*
+          = f.input :first_name,
+                    input_html: {class: 'form-control required valid', required: true},
+                    label: false
 
-	.profilet
-		.col-lg-12 
-			.profile-top
-				.col-md-3
-					= image_tag ("#{ @parent.profile_photo || ('defaultm.png')}"),class:"img-responsive profile-pic", height:"150px",width:"150px"
-					= link_to 'Change Photo', '#', {class: 'btn btn-primary js-admin-fp-button profile-input hide',data: {'fp-apikey': Rails.configuration.filepicker_rails_api_key,'fp-bucket': Rails.configuration.filepicker_rails_store_container,'fp-store-path': 'aime/'}}
-				.col-md-7.profile-info.form-group 
-					.profile-text #{ @parent.first_name } #{ @parent.last_name }
-					.form-inputs 
-						=f.input :first_name,:label=>false,:placeholder=>"First Name",input_html:{:value=>@parent.first_name,:class=>'profile-fields profile-input field hide',:required=>true}
-						=f.input :last_name,:label=>false,:placeholder=>"Last Name",input_html:{:value=>@parent.last_name,:class=>'profile-fields profile-input field hide'}
-					.profile-age #{ (@parent.dob) ? "#{age(@parent.dob)} YEARS OLD" : '' }  
-					%br
-					=render "social_links"
-				.col-md-2
-					.edit-profile.profile-text 
-						%a.btn.btn-primary Edit
-					.cancel-profile.profile-input.hide 
-						%a.btn.btn-primary Cancel
+        .input_row.form-group
+          label Last Name:*
+          = f.input :last_name,
+                    as: :string,
+                    input_html: {class: 'form-control required valid', required: true},
+                    label: false
 
-	.profilet
-		.col-lg-12
-			.col-md-12
-				%h4{:class=>'page-header'} User Info
-				.uppercase
-					.col-lg-12.profile-fields
-						.col-md-5
-							Birthday
-						.col-md-7.form-group	
-							.profile-text #{ (@parent.dob) ? @parent.dob : '--'}
-							.form-inputs
-								=f.input :dob,:label=>false,start_year: Time.now.year - 90, end_year: Time.now.year - 8,input_html:{:value=>@parent.dob,:class=>'form-control dob-profile datepicker date-picker profile-input field hide'},as: :string
-					.col-lg-12.profile-fields
-						.col-md-5
-							Languages
-						.col-md-7.form-group	
-							.profile-text #{ (@parent.languages.blank?) ? '--' : @parent.languages }
-							.form-inputs
-								=f.input :languages,:label=>false,:placeholder=>"Langauges",input_html:{:value=>@parent.languages,:class=>'form-control profile-input field hide'}
-					.col-lg-12.profile-fields
-						.col-md-5
-							
-						.col-md-7
-							.form-actions.profile-input.hide
-								= f.button :submit, "Update",:class=>'btn btn-primary'
-    
--if(!params[:commit].blank? )
-- content_for (:custom_javascripts) 
-	:javascript
-		update_file = 1;
 
-- content_for(:custom_javascripts) do
-	:javascript
-		upload_path = "/parent/profiles/upload_file";
-	= render 'layouts/filepicker_lib'
+        .input_row.form-group
+          = f.button :submit, 'Submit', class: 'btn btn-primary'
+= render 'layouts/filepicker_lib'
