@@ -12,7 +12,7 @@ class Teacher::ApplicationController < ApplicationController
 
   private
 
-  def authorize_parent!
+  def authorize_teacher!
     @current_teacher = current_user.teacher
     redirect_to teacher_profiles_path unless @current_teacher
   end

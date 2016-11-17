@@ -7,11 +7,11 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
 
     if params[:user][:type] == 'teacher'
-      teacher_dashboard_index_path
+      teacher_dashboard_path
     elsif params[:user][:type] == 'parent'
-      parent_dashboard_index_path
+      parent_dashboard_path
     else
-      student_dashboard_index_path
+      student_dashboard_path
     end
   end
 

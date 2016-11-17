@@ -2,7 +2,7 @@ class Student::ApplicationController < ApplicationController
   layout 'student'
 
   before_action :authenticate_user!
-  before_action :authorize_student!
+  before_action :authorize_student
 
   helper_method :current_student
 
@@ -13,8 +13,8 @@ class Student::ApplicationController < ApplicationController
 
   private
 
-  def authorize_student!
+  def authorize_student
     @current_student = current_user.student
-    redirect_to student_profiles_path unless @current_student
+    redirect_to new_student_profile_path unless @current_student
   end
 end

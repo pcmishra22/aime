@@ -1,97 +1,21 @@
-.profile-main
-= simple_form_for(@student ,:url=> url_for(:action=>"update",:controller=>"profiles")) do |f|
-	= f.error_notification
+.container
+  .row
+    = simple_form_for @student, :url =>student_profile_path  do |f|
+      .col-lg-9.col-md-9.col-sm-9.col-xs-9
+        .input_row.form-group
+          label First Name:*
+          = f.input :first_name,
+                    input_html: {class: 'form-control required valid', required: true},
+                    label: false
 
-	.profilet
-		.col-lg-12 
-			.profile-top
-				.col-md-3
-					= image_tag ("#{ @student.profile_photo || ('defaultm.png')}"),class:"img-responsive profile-pic", height:"150px",width:"150px"
-					= link_to 'Change Photo', '#', {class: 'btn btn-primary js-admin-fp-button profile-input hide',data: {'fp-apikey': Rails.configuration.filepicker_rails_api_key,'fp-bucket': Rails.configuration.filepicker_rails_store_container,'fp-store-path': 'aime/'}}
-				.col-md-7.profile-info.form-group 
-					.profile-text #{ @student.first_name } #{ @student.last_name }
-					.form-inputs 
-						=f.input :first_name,:label=>false,:placeholder=>"First Name",input_html:{:value=>@student.first_name,:class=>'profile-fields profile-input field hide',:required=>true}
-						=f.input :last_name,:label=>false,:placeholder=>"Last Name",input_html:{:value=>@student.last_name,:class=>'profile-fields profile-input field hide'}
-					.profile-age #{ (@student.dob) ? "#{age(@student.dob)} YEARS OLD" : '' }  
-					%br
-					=render "social_links"
-				.col-md-2
-					.edit-profile.profile-text 
-						%a.btn.btn-primary Edit
-					.cancel-profile.profile-input.hide 
-						%a.btn.btn-primary Cancel
-
-	.profilet
-		.col-lg-12
-			.col-md-6
-				%h4{:class=>'page-header'} User Info
-				.uppercase
-					.col-lg-12.profile-fields
-						.col-md-5
-							Birthday
-						.col-md-7.form-group	
-							.profile-text #{ (@student.dob) ? @student.dob : '--'}
-							.form-inputs
-								=f.input :dob,:label=>false,start_year: Time.now.year - 90, end_year: Time.now.year - 8,input_html:{:value=>@student.dob,:class=>'form-control dob-profile datepicker date-picker  profile-input field hide'},as: :string
-					.col-lg-12.profile-fields
-						.col-md-5
-							Languages
-						.col-md-7.form-group	
-							.profile-text #{ (@student.languages.blank?) ? '--' : @student.languages }
-							.form-inputs
-								=f.input :languages,:label=>false,:placeholder=>"Langauges",input_html:{:value=>@student.languages,:class=>'form-control profile-input field hide'}
-					.col-lg-12.profile-fields
-						.col-md-5
-							Activities
-						.col-md-7.form-group	
-							.profile-text #{ (@student.activities.blank?) ? '--' : @student.activities}
-							.form-inputs
-								=f.input :activities,:label=>false,:placeholder=>"Activities",input_html:{:value=>@student.activities,:class=>'form-control profile-input field hide'}
-					.col-lg-12.profile-fields
-						.col-md-5
-							Videos
-						.col-md-7.form-group	
-							.profile-text #{ (@student.videos.blank?) ? '--' :  @student.videos}
-							.form-inputs
-								=f.input :videos,:label=>false,:placeholder=>"Videos",input_html:{:value=>@student.videos,:class=>'form-control profile-input field hide'}
-					.col-lg-12.profile-fields
-						.col-md-5
-							Favourite Class
-						.col-md-7.form-group	
-							.profile-text #{ (@student.favourite_class) ? @courses[@student.favourite_class] : '--'}
-							.form-inputs
-								= f.input :favourite_class,:type=>"select",:collection => {"Science"=>1,"Math"=>2},:label=>false,:placeholder=>"Favourite Class",input_html:{:value=>@student.favourite_class,:class=>'form-control profile-input field hide'},:include_blank=>true
-					.col-lg-12.profile-fields
-						.col-md-5
-							Study Groups
-						.col-md-7.form-group	
-							.profile-text #{ (@student.study_groups.blank?) ? '--' : @student.study_groups}
-							.form-inputs
-								=f.input :study_groups,:label=>false,:placeholder=>"Study Groups",input_html:{:value=>@student.study_groups,:class=>'form-control profile-input field hide'}
-					.col-lg-12.profile-fields
-						.col-md-5
-							Awards
-						.col-md-7.form-group    	
-							.profile-text #{ (@student.awards.blank?) ? '--' :  @student.awards }
-							.form-inputs
-								=f.input :awards,:label=>false,:placeholder=>"Awards",input_html:{:value=>@student.awards,:class=>'form-control profile-input field hide'}
-					.col-lg-12.profile-fields
-						.col-md-5
-							
-						.col-md-7
-							.form-actions.profile-input.hide
-								= f.button :submit, "Update",:class=>'btn btn-primary'
-    
-			.col-md-6
-				%h4{:class=>'page-header'} Classmates
--if(!params[:commit].blank? )
-- content_for (:custom_javascripts) 
-	:javascript
-		update_file = 1
+        .input_row.form-group
+          label Last Name:*
+          = f.input :last_name,
+                    as: :string,
+                    input_html: {class: 'form-control required valid', required: true},
+                    label: false
 
 
-- content_for(:custom_javascripts) do
-	:javascript
-		upload_path = "/student/profiles/upload_file";
-	= render 'layouts/filepicker_lib'
+        .input_row.form-group
+          = f.button :submit, 'Submit', class: 'btn btn-primary'
+= render 'layouts/filepicker_lib'

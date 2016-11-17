@@ -4,6 +4,6 @@
   -#%li= link_to "COURSES", student_dashboard_index_path
   -#%li= link_to "LIBRARY", student_dashboard_index_path
   -#%li= link_to "RESEARCH", student_dashboard_index_path
-  %li= link_to "REWARD", student_dashboard_index_path
-  %li= link_to "PROFILE", edit_student_profile_path(current_user.id)
+  %li= link_to "REWARD", student_dashboard_path
+  %li= link_to "PROFILE", edit_student_profile_path
   %li= link_to "Sign out", destroy_user_session_path, :method => :delete
