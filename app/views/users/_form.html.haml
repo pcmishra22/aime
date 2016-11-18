@@ -17,23 +17,7 @@
     .form-group
       = f.input :password_confirmation,placeholder:"Confirm Password*" ,:input_html=>{ :class=>'form-control' }
     
-    %ul{class:"radio"}
-      %li{class:"list-radio"}        
-        =f.radio_button :usertype,"2",:checked => true
-        =f.label :usertype, "Teacher", :value => "2"
-        .check
-          
-      %li{class:"list-radio"}
-        =f.radio_button :usertype,"1",:checked => false
-        =f.label :usertype, "Student", :value => "1"
-        .check
-          .inside
 
-      %li{class:"list-radio"}        
-        =f.radio_button :usertype,"3",:checked => false
-        =f.label :usertype, "Parent", :value => "3"
-        .check
-          .inside
 
     .form-actions
       = f.button :submit, "Get Start",:class=>'btn btn-default color'

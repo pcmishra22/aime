@@ -1,7 +1,7 @@
 class Parent::ProfilesController < Parent::ApplicationController
   layout 'parent'
 
-  skip_before_action :authorize_parent, only: [:new, :create]
+  skip_before_action :authorize_parent!, only: [:new, :create]
 
   def index
     render json: current_user.parent

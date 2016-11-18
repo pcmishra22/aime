@@ -2,7 +2,7 @@ class Student::ProfilesController < Student::ApplicationController
   layout 'student'
   helper UsersHelper
 
-  skip_before_action :authorize_student, only: [:new, :create]
+  skip_before_action :authorize_student!, only: [:new, :create]
 
   def index
     render json: current_user.student

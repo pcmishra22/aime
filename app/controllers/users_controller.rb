@@ -7,9 +7,8 @@ class UsersController < ApplicationController
   def new
   	@user = User.new
   end
-  def create  
-  	@user = User.new(user_param)  	
-    @user.usertype = User.types[params[:user][:usertype]]
+  def create
+  	@user = User.new(user_param)
 
   	if @user.save
   	  redirect_to '/users/sign_in'

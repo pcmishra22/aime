@@ -1,6 +1,6 @@
 class Teacher::ProfilesController < Teacher::ApplicationController
   layout 'teacher'
-  skip_before_action :authorize_teacher, only: [:new, :create]
+  skip_before_action :authorize_teacher!, only: [:new, :create]
 
   def index
     render json: current_user.teacher
