@@ -23,8 +23,8 @@ div{margin:0; padding:0 !important;}
     padding: 35px;
     padding-top: 41px;
     display: block-inline;
-    line-height: 104px;
-    padding-bottom: 48px;
+    line-height: 60px;
+    padding-bottom: 22px;
     text-decoration: none;
     background-color:transparent !important;}
 .navigation a:hover{background-color:grey !important; color:#000 !important;} 
