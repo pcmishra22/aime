@@ -1,4 +1,4 @@
-class Teacher::SchedulesController < Teacher::ApplicationController
+class Teacher::SchedulesController < Teacher::AppController
   layout 'teacher'
   before_action :set_courses,only:[:index,:new,:create,:edit,:update]
 	before_action :validate_course,only:[:create,:update]

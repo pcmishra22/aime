@@ -1,9 +1,7 @@
-class Teacher::DashboardsController < Teacher::ApplicationController
+class Teacher::DashboardsController < Teacher::AppController
   layout 'teacher'
 
   def show
-
-    @teacher =  current_teacher
   end
 
 end

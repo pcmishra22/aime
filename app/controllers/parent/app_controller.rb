@@ -1,8 +1,7 @@
-class Parent::ApplicationController < ApplicationController
+class Parent::AppController < ApplicationController
   layout 'parent'
 
-  before_action :authenticate_user!
-  before_action :authorize_parent!
+  before_action :authenticate_user!, :authorize_parent!
 
   helper_method :current_parent
 

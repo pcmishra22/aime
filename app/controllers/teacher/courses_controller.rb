@@ -1,4 +1,4 @@
-class Teacher::CoursesController < Teacher::ApplicationController
+class Teacher::CoursesController < Teacher::AppController
   layout 'teacher'
   before_action :set_course,only:[:edit,:update]
   def index

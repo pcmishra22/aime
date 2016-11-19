@@ -1,6 +1,5 @@
-class Parent::DashboardsController < Parent::ApplicationController
+class Parent::DashboardsController < Parent::AppController
 
   def show
-    @parent =  current_parent
   end
 end

@@ -1,4 +1,4 @@
-class Parent::ProfilesController < Parent::ApplicationController
+class Parent::ProfilesController < Parent::AppController
   layout 'parent'
 
   skip_before_action :authorize_parent!, only: [:new, :create]
