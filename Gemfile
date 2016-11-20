@@ -38,7 +38,10 @@ gem 'premailer-rails'
 gem 'nokogiri'
 gem 'httparty'
 gem 'rack-timeout'
-
+gem 'activeadmin', github: 'activeadmin'
+gem 'cancan'
+gem 'draper'
+gem 'pundit'
 
 group :development, :test do
   gem 'byebug'

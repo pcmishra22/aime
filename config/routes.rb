@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   get 'pages/about'
 
   get 'pages/aimesays'
@@ -41,10 +43,5 @@ Rails.application.routes.draw do
     resource :dashboard
     resource :profile
   end
-
-  namespace :admin do
-    resources :dashboard
-  end
-
 
 end
