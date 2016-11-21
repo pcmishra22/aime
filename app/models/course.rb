@@ -1,5 +1,5 @@
 class Course < ActiveRecord::Base
-	belongs_to :user
+	belongs_to :teacher
 	has_many :schedule
 	validates :name, :presence => true
 	def self.my_active_courses(user_id)

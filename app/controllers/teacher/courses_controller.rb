@@ -1,12 +1,11 @@
 class Teacher::CoursesController < Teacher::AppController
-  layout 'teacher'
-  before_action :set_course,only:[:edit,:update]
-  def index
-  	@course = Course.my_active_courses(current_user.id)
+
+	def index
+  	@courses = current_teacher.courses
   end
 
   def new
-  	@course = Course.new
+  	@course = current_teacher.courses.new
   end
   
   def create
@@ -32,12 +31,7 @@ class Teacher::CoursesController < Teacher::AppController
   
   private
   def course_params
-  	params.require(:course).permit(:name)
+  	params.require(:course).permit(:name, :details, :greade, :subject_area)
   end
-  def set_course
-  	@course = Course.find(params[:id])
-  	if(@course.teacherid != current_user.id)
-  		redirect_to teacher_courses_path ,:error=>"You cannot edit this Course."
-  	end
-  end
+
 end
