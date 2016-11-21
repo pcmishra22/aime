@@ -9,8 +9,7 @@ class Teacher::CoursesController < Teacher::AppController
   end
   
   def create
-  	@course = Course.new(course_params)
-  	@course.teacherid = current_user.id
+  	@course = current_teacher.courses.new(course_params)
   	if @course.save
   		redirect_to teacher_courses_path ,:notice=>"Course is Successfully Added."
   	else
@@ -19,9 +18,11 @@ class Teacher::CoursesController < Teacher::AppController
   end
 
   def edit
-
+		@course = Course.find(params[:id])
   end
-  def update
+
+	def update
+		@course = Course.find(params[:id])
   	if(@course.update(course_params))
   		redirect_to teacher_courses_path ,:notice=>"Course is Successfully Updated."
   	else
