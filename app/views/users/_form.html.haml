@@ -1,23 +1,26 @@
-.col-sm-12.no-padding
-  = simple_form_for(@user,:html =>{class:""}) do |f|
-    = f.error_notification
-    .form-group.half.second
-      = f.input :first_name,:label=>"First Name",placeholder:"First Name*" ,:input_html=>{ :class=>'form-control' }
-      %span{class:"fa-2x fa fa-user text-muted form-control-feedback"}
+%section#mu-gallery
+  .container
+    .row
+      .col-md-9
+        = simple_form_for(@user,:html =>{class:""}) do |f|
+          = f.error_notification
+          .form-group.half.second
+            = f.input :first_name,:label=>"First Name",placeholder:"First Name*" ,:input_html=>{ :class=>'form-control' }
+            %span{class:"fa-2x fa fa-user text-muted form-control-feedback"}
 
-    .form-group.half
-      = f.input :last_name,:label=>"Last Name",placeholder:"Last Name*" ,:input_html=>{ :class=>'form-control' }
+          .form-group.half
+            = f.input :last_name,:label=>"Last Name",placeholder:"Last Name*" ,:input_html=>{ :class=>'form-control' }
 
-    .form-group
-      = f.input :email,:label=>'Email' ,placeholder:"Email*" ,:input_html=>{ :class=>'form-control' }
+          .form-group
+            = f.input :email,:label=>'Email' ,placeholder:"Email*" ,:input_html=>{ :class=>'form-control' }
 
-    .form-group.has-feedback
-      = f.input :password,placeholder:"Password*" ,:input_html=>{ :class=>'form-control' }
+          .form-group.has-feedback
+            = f.input :password,placeholder:"Password*" ,:input_html=>{ :class=>'form-control' }
 
-    .form-group
-      = f.input :password_confirmation,placeholder:"Confirm Password*" ,:input_html=>{ :class=>'form-control' }
-    
+          .form-group
+            = f.input :password_confirmation,placeholder:"Confirm Password*" ,:input_html=>{ :class=>'form-control' }
 
 
-    .form-actions
-      = f.button :submit, "Get Start",:class=>'btn btn-default color'
+
+          .form-actions
+            = f.button :submit, "Get Started",:class=>'btn btn-default color'

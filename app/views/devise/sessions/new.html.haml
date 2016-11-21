@@ -1,49 +1,28 @@
-.col-lg-12.col-md-12.col-xm-12.col-sm-12.Sign-up-box.clearfix
-	.col-lg-12.col-md-12.col-xm-12.col-sm-12.clearfix
-		.box.clearfix
-			%ul
-				%li{class:"type"}
-					=link_to "Sign Up",new_user_path,class:"pin"
-				%li{class:"type"}
-					=link_to "Login",new_user_session_path,class:"pin activee"
-			%h6{class:"free clearfix"} Login Fast
-			.col-sm-12.no-padding
-				= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :role => 'form',:class=>""}) do |f|
-					= devise_error_messages!
+%section#mu-gallery
+  .container
+    .row
+      .col-md-9
+        = form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :role => 'form',:class=>""}) do |f|
+          = devise_error_messages!
 
-					.form-group
-						= f.label :email,"Email:"
-						= f.email_field :email, :autofocus => true, class: 'form-control',placeholder:"Enter email*"
+          .form-group
+            = f.label :email,"Email:"
+            = f.email_field :email, :autofocus => true, class: 'form-control',placeholder:"Enter email*"
 
-					.form-group.has-feedback
-						= f.label :password,"Password:"
-						= f.password_field :password, class: 'form-control',:placeholder=>"Enter password*" 
-					%ul{class:"radio"}
-						%li{class:"list-radio"}        
-							=f.radio_button :type,"teacher",:checked => true
-							=f.label :type, "Teacher", :value => "teacher"
-							.check
+          .form-group.has-feedback
+            = f.label :password,"Password:"
+            = f.password_field :password, class: 'form-control',:placeholder=>"Enter password*"
 
-						%li{class:"list-radio"}
-							=f.radio_button :type,"student",:checked => false
-							=f.label :type, "Student", :value => "student"
-							.check
-								.inside
+          .form-group.has-feedback
 
-						%li{class:"list-radio"}        
-							=f.radio_button :type,"parent",:checked => false
-							=f.label :type, "Parent", :value => "parent"
-							.check
-								.inside
+            =f.radio_button :type,"teacher",:checked => true
+            =f.label :type, "Teacher", :value => "teacher"
 
-					= f.button 'Log in', :class => 'btn btn-default color'
+            =f.radio_button :type,"student",:checked => false
+            =f.label :type, "Student", :value => "student"
 
-				.text-center
-					- if devise_mapping.recoverable?
-						%span{class:"text-white"} Forgot your password?
-						%p{class:"text-danger lead"}
-							= link_to "Remind password?", new_password_path(resource_name),:class=>"text-danger"
+            =f.radio_button :type,"parent",:checked => false
+            =f.label :type, "Parent", :value => "parent"
 
-					-#if devise_mapping.rememberable?
-						-#.checkbox
-							-#= f.check_box :remember_me
+          = f.button 'Log in', :class => 'mu-post-btn'
+

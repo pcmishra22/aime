@@ -18,21 +18,12 @@
       / <a class="navbar-brand" href="index.html"><img src="assets/img/logo.png" alt="logo"></a>
       #navbar.navbar-collapse.collapse
         %ul#top-menu.nav.navbar-nav.navbar-right.main-nav
-          %li.active
-            %a{:href => "index.html"} Home
-          %li.dropdown
-            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-              Course
-              %span.fa.fa-angle-down
-            %ul.dropdown-menu{:role => "menu"}
-              %li
-                %a{:href => "course.html"} Course Archive
-              %li
-                %a{:href => "course-detail.html"} Course Detail
           %li
-            %a{:href => "contact.html"} Contact
+            = link_to 'Dashboard', student_dashboard_path
           %li
-            %a{:href => "#{new_user_session_path}"} Login
+            = link_to 'Course', '#'
           %li
-            %a{:href => "#{new_user_path}"} Sign Up
+            = link_to 'Profile', student_profile_path
+          %li
+            = link_to 'Logout', destroy_user_session_path, :method => :delete
 
