@@ -1,8 +1,56 @@
-.footer
-  %ul.foot
-    %li= link_to "ABOUT", pages_about_path
-    %li= link_to "CONTACT", pages_contact_path
-    %li= link_to "CAREERS", pages_careers_path
-    %li= link_to "VIDEOS", pages_videos_path
-    %li
-      %a.aimse{:href=>"#"}A.I.M.E SAYS
+/ Start footer
+%footer#mu-footer
+  / start footer top
+  .mu-footer-top
+    .container
+      .mu-footer-top-area
+        .row
+          .col-lg-3.col-md-3.col-sm-3
+            .mu-footer-widget
+              %h4 Information
+              %ul
+                %li
+                  %a{:href => "#"} About Us
+                %li
+                  %a{:href => ""} Features
+                %li
+                  %a{:href => ""} Course
+                %li
+                  %a{:href => ""} Event
+                %li
+                  %a{:href => ""} Sitemap
+                %li
+                  %a{:href => ""} Term Of Use
+          .col-lg-3.col-md-3.col-sm-3
+            .mu-footer-widget
+              %h4 Student Help
+              %ul
+                %li
+                  %a{:href => ""} Get Started
+                %li
+                  %a{:href => "#"} My Questions
+                %li
+                  %a{:href => ""} Download Files
+                %li
+                  %a{:href => ""} Latest Course
+                %li
+                  %a{:href => ""} Academic News
+          .col-lg-3.col-md-3.col-sm-3
+            .mu-footer-widget
+              %h4 News letter
+              %p Get latest update, news  academic offers
+              %form.mu-subscribe-form
+                %input{:placeholder => "Type your Email", :type => "email"}
+                  %button.mu-subscribe-btn{:type => "submit"} Subscribe!
+            .col-lg-3.col-md-3.col-sm-3
+              .mu-footer-widget
+                %h4 Contact
+                %address
+                  %p Email: info@aime.com
+    / end footer top
+    / start footer bottom
+    .mu-footer-bottom
+      .container
+        .mu-footer-bottom-area
+          %p
+            All Right Reserved.

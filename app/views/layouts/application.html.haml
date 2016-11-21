@@ -1,8 +1,9 @@
 !!!
 %html
   %head
-
-    %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
+    %meta{charset:"utf-8"}
+    %meta{'http-equiv'=>"X-UA-Compatible", content:"IE=edge"}
+    %meta{:name => "viewport", :content => "width=device-width, initial-scale=1"}
     %title= content_for?(:title) ? yield(:title) : 'Aime'
     %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'AIME'}"}
 
@@ -12,36 +13,10 @@
 
     = csrf_meta_tags
     = yield :custom_heads
-  %body{style:"background-color:grey;"}
-    .clearfix{style:"background-color:grey;"}
-      .container{style:"background-color: black;color: white;" }
-        .navigation.clearfix
-          .col-lg-3.col-sm-3.col-xs-3.col-md-3.pull-left
-            = link_to image_tag( 'logo.png') , root_path
-          .col-lg-5.offset-lg-4.col-sm-5.offset-sm-4.col-xs-5.offset-xs-4.col-md-5.offset-xm-4.border.pull-right
-            = render 'layouts/user_header'
-        .content-wrapper
-          = render 'layouts/messages'
-          = yield
-        = render 'layouts/footer'
+  %body
+    = render 'layouts/header'
+    = render 'layouts/navigation'
+    = yield
+    = render 'layouts/footer'
   = javascript_include_tag 'application'
   = yield :custom_javascripts
-  :javascript
-    function myFunction() {
-      document.getElementById("myDropdown").classList.toggle("show");
-    }
-
-    function filterFunction() {
-      var input, filter, ul, li, a, i;
-      input = document.getElementById("myInput");
-      filter = input.value.toUpperCase();
-      div = document.getElementById("myDropdown");
-      a = div.getElementsByTagName("a");
-      for (i = 0; i < a.length; i++) {
-        if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
-          a[i].style.display = "";
-        } else {
-          a[i].style.display = "none";
-        }
-      }
-    }

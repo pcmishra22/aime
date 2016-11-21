@@ -1,0 +1,52 @@
+/ Start menu
+%section#mu-menu
+  %nav.navbar.navbar-default{:role => "navigation"}
+    .container
+      .navbar-header
+        / FOR MOBILE VIEW COLLAPSED BUTTON
+        %button.navbar-toggle.collapsed{"aria-controls" => "navbar", "aria-expanded" => "false", "data-target" => "#navbar", "data-toggle" => "collapse", :type => "button"}
+          %span.sr-only Toggle navigation
+          %span.icon-bar
+          %span.icon-bar
+          %span.icon-bar
+        / LOGO
+        / TEXT BASED LOGO
+        %a.navbar-brand{:href => "index.html"}
+          %i.fa.fa-university
+          %span AIME
+      / IMG BASED LOGO
+      / <a class="navbar-brand" href="index.html"><img src="assets/img/logo.png" alt="logo"></a>
+      #navbar.navbar-collapse.collapse
+        %ul#top-menu.nav.navbar-nav.navbar-right.main-nav
+          %li.active
+            %a{:href => "index.html"} Home
+          %li.dropdown
+            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              Course
+              %span.fa.fa-angle-down
+            %ul.dropdown-menu{:role => "menu"}
+              %li
+                %a{:href => "course.html"} Course Archive
+              %li
+                %a{:href => "course-detail.html"} Course Detail
+          %li
+            %a{:href => "gallery.html"} Gallery
+          %li.dropdown
+            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              Blog
+              %span.fa.fa-angle-down
+            %ul.dropdown-menu{:role => "menu"}
+              %li
+                %a{:href => "blog-archive.html"} Blog Archive
+              %li
+                %a{:href => "blog-single.html"} Blog Single
+          %li
+            %a{:href => "contact.html"} Contact
+          %li
+            %a{:href => "404.html"} 404 Page
+          %li
+            %a#mu-search-icon{:href => "#"}
+              %i.fa.fa-search
+                / /.nav-collapse
+              / End menu
+
