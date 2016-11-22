@@ -8,6 +8,10 @@ ActiveAdmin.register Course do
     column :status
     column :subject_area
     column :grade
+    column 'Schedule' do |course|
+      link_to 'Schedule', [:admin, course, :schedules]
+    end
+
     actions
   end
 
