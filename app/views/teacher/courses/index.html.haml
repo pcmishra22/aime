@@ -1,18 +1,20 @@
-.row
-  .col-lg-12
-    %h2{:class=>'page-header'} Courses
-  = link_to "Add Course" ,new_teacher_course_path,:class=>'btn btn-primary'
-- @courses.each do |course|
-  .row
-    .col-md-9.m-t-10
-      %b
-        = course.name
-      %p
-        = course.details
+%section#mu-gallery
+  .container
+    .row
+      .col-lg-12
+      = link_to "Add Course" ,new_teacher_course_path,:class=>'btn btn-primary'
+    - @courses.each do |course|
+      .row
+        .col-md-9.m-t-10
+          %b
+            = course.name
+          %p
+            = course.details
 
-    .col-md-3.m-t-10
-      = link_to "Edit | " ,edit_teacher_course_path(course)
-      %nbsp
-      = link_to "Add Schedule | " , new_teacher_schedule_path(:course_id=>course.id)
-      %nbsp |
-      = link_to "   View Schedule" , teacher_schedules_path(:course_id=>course.id)
+        .col-md-3.m-t-10
+          = link_to "Edit | " ,edit_teacher_course_path(course)
+          %nbsp
+          = link_to "Add Schedule | " , new_teacher_schedule_path(:course_id=>course.id)
+          %nbsp |
+          = link_to "   View Schedule" , teacher_schedules_path(:course_id=>course.id)
+      %hr
