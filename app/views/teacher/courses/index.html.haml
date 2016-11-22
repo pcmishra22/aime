@@ -13,8 +13,5 @@
 
         .col-md-3.m-t-10
           = link_to "Edit | " ,edit_teacher_course_path(course)
-          %nbsp
-          = link_to "Add Schedule | " , new_teacher_schedule_path(:course_id=>course.id)
-          %nbsp |
-          = link_to "View Schedule" , teacher_schedules_path(:course_id=>course.id)
+          = link_to "Schedules" , teacher_course_schedules_path(:course_id=>course.id)
       %hr

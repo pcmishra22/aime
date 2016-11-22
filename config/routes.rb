@@ -36,8 +36,9 @@ Rails.application.routes.draw do
   namespace :teacher do
     resource :dashboard
     resource :profile
-    resources :courses
-    resources :schedules
+    resources :courses do
+      resources :schedules
+    end
   end
 
   namespace :guardian do
