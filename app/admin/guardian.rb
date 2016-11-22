@@ -1,4 +1,4 @@
-ActiveAdmin.register Parent do
+ActiveAdmin.register Guardian do
   permit_params :first_name, :last_name
 
   index do
@@ -15,7 +15,7 @@ ActiveAdmin.register Parent do
   filter :last_name
 
   form do |f|
-    f.inputs "Parent Details" do
+    f.inputs "Guardian Details" do
       f.input :first_name
       f.input :last_name
     end

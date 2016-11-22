@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
      unless params[:admin_user].present?
        if params[:user][:type] == 'teacher'
          teacher_dashboard_path
-       elsif params[:user][:type] == 'parent'
+       elsif params[:user][:type] == 'guardian'
          parent_dashboard_path
        else
          student_dashboard_path

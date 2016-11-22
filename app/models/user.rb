@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
 
   has_one :student
   has_one :teacher
-  has_one :parent
+  has_one :guardian
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

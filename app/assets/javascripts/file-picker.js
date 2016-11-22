@@ -25,7 +25,7 @@ $(document).ready(function(){
     });
 
 
-    $('.file-picker-parent').on('click','.js-admin-fp-button',function(e){
+    $('.file-picker-guardian').on('click','.js-admin-fp-button',function(e){
         e.preventDefault();
 
         var el = $(this);

@@ -1,0 +1,9 @@
+%section#mu-gallery
+  .container
+    .row
+      .col-md-3
+        %ul
+          - @conversations.each do |conversation|
+            %li= conversation.last_message_text
+      .col-md-9
+        %p message thread

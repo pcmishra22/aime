@@ -11,7 +11,7 @@
 		.col-md-2
 			.edit-profile.profile-text
 				-if(@profile.id != current_user.id) 
-					= link_to "Send Message", "/messages/new/user/#{@profile.id}",:class=>"btn btn-primary"
+					= link_to "Send Message", "/conversations/new/user/#{@profile.id}",:class=>"btn btn-primary"
 
 .col-lg-12
 	.col-md-6

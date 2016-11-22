@@ -1,4 +1,4 @@
-class Parent::ProfilesController < Parent::AppController
+class Guardian::ProfilesController < Guardian::AppController
   layout 'parent'
 
   skip_before_action :authorize_parent!, only: [:new, :create]
@@ -13,17 +13,17 @@ class Parent::ProfilesController < Parent::AppController
     # Student has already their profile created
     redirect_to edit_parent_profile_path if current_parent
 
-    @parent = Parent.new
+    @parent = Guardian.new
   end
 
   def create
-    @parent = Parent.new(parent_params)
+    @parent = Guardian.new(parent_params)
     @parent.user = current_user
 
 
     respond_to do |format|
       if @parent.save
-        format.html { redirect_to parent_profile_path, notice: 'Your parent profile created successfully' }
+        format.html { redirect_to parent_profile_path, notice: 'Your guardian profile created successfully' }
         format.json { render :show, status: :created, location: @parent }
       else
         format.html { render :new }
@@ -51,7 +51,7 @@ class Parent::ProfilesController < Parent::AppController
   end
 
   def parent_params
-    params.require(:parent).permit :first_name, :last_name, :profile_photo_url
+    params.require(:guardian).permit :first_name, :last_name, :profile_photo_url
   end
 
 

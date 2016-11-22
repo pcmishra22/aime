@@ -57,7 +57,7 @@ jQuery ->
 		replyMail()
 		return false
 
-	$('.file-picker-parent').on 'click', '.clear-file-pic', ->
+	$('.file-picker-guardian').on 'click', '.clear-file-pic', ->
 		$("#file_pic_attached").val("")
 		$(".file-stack-file").html("File not attached.")
 		$(".clear-file-pic").addClass("hide")

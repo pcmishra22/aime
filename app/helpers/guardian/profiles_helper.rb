@@ -1,0 +1,2 @@
+module Guardian::ProfilesHelper
+end

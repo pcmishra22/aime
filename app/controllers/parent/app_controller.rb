@@ -1,4 +1,4 @@
-class Parent::AppController < ApplicationController
+class Guardian::AppController < ApplicationController
   layout 'parent'
 
   before_action :authenticate_user!, :authorize_parent!

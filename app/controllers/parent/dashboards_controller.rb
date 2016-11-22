@@ -1,4 +1,4 @@
-class Parent::DashboardsController < Parent::AppController
+class Guardian::DashboardsController < Guardian::AppController
 
   def show
   end

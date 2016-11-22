@@ -25,11 +25,12 @@ Rails.application.routes.draw do
   namespace :student do
     resource :dashboard
     resource :profile
+    resources :conversations
 
   end
   
-  get '/messages/new/:type/:mid', to: 'messages#new'
-  get '/messages/:box', to: 'messages#index'
+  get '/conversations/new/:type/:mid', to: 'conversations#new'
+  get '/conversations/:box', to: 'conversations#index'
   resources :messages
 
   namespace :teacher do
@@ -39,7 +40,7 @@ Rails.application.routes.draw do
     resources :schedules
   end
 
-  namespace :parent do
+  namespace :guardian do
     resource :dashboard
     resource :profile
   end

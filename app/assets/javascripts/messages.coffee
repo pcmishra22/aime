@@ -23,7 +23,7 @@ sendMessage = () ->
 		message: messagePostVal
 	};
 
-	$.ajax "/messages",
+	$.ajax "/conversations",
 		type: "post"
 		data: dataPost
 		dataType: "json"

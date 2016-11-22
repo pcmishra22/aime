@@ -1,6 +1,6 @@
 class Mailbox < ActiveRecord::Base
 	before_create :recipient_user
-	enum usertype: { '1' => "Student", '2' => "Teacher", '3' => "Parent" }
+	enum usertype: { '1' => "Student", '2' => "Teacher", '3' => "Guardian" }
 	validates :to_email, :presence => true
 	validates :end_date, :presence => true , :on => :create_new
 	validates :subject, :presence => true , :on => :create_new

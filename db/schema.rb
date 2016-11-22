@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161121074714) do
+ActiveRecord::Schema.define(version: 20161122120547) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,20 @@ ActiveRecord::Schema.define(version: 20161121074714) do
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
+  create_table "conversations", force: :cascade do |t|
+    t.integer  "sender_id"
+    t.integer  "recipient_id"
+    t.integer  "sender_type"
+    t.integer  "recipient_type"
+    t.text     "last_message_text"
+    t.boolean  "is_read",           default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "conversations", ["recipient_id", "recipient_type"], name: "index_conversations_on_recipient_id_and_recipient_type", using: :btree
+  add_index "conversations", ["sender_id", "sender_type"], name: "index_conversations_on_sender_id_and_sender_type", using: :btree
+
   create_table "courses", force: :cascade do |t|
     t.string    "name"
     t.integer   "teacher_id",                  null: false
@@ -61,6 +75,17 @@ ActiveRecord::Schema.define(version: 20161121074714) do
   end
 
   add_index "courses", ["teacher_id"], name: "index_courses_on_teacher_id", using: :btree
+
+  create_table "guardians", force: :cascade do |t|
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.integer  "user_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "profile_photo_url"
+  end
+
+  add_index "guardians", ["user_id"], name: "index_guardians_on_user_id", unique: true, using: :btree
 
   create_table "mailboxes", force: :cascade do |t|
     t.integer  "mail_from",                  null: false
@@ -80,32 +105,17 @@ ActiveRecord::Schema.define(version: 20161121074714) do
   add_index "mailboxes", ["mail_from"], name: "index_mailboxes_on_mail_from", using: :btree
   add_index "mailboxes", ["mail_to"], name: "index_mailboxes_on_mail_to", using: :btree
 
-  create_table "messages", force: :cascade do |t|
-    t.integer  "user_id",                           null: false
-    t.integer  "recipient_user_id",                 null: false
-    t.integer  "parent_message_id", default: 0,     null: false
-    t.text     "text",                              null: false
-    t.boolean  "is_read",           default: false, null: false
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
-    t.text     "current_text"
-    t.string   "usertype"
+  create_table "conversations", force: :cascade do |t|
+    t.integer  "sender_id"
+    t.text     "message"
+    t.string   "attachment_url"
+    t.string   "ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "conversation_id"
   end
 
-  add_index "messages", ["parent_message_id"], name: "index_messages_on_parent_message_id", using: :btree
-  add_index "messages", ["recipient_user_id"], name: "index_messages_on_recipient_user_id", using: :btree
-  add_index "messages", ["user_id"], name: "index_messages_on_user_id", using: :btree
-
-  create_table "parents", force: :cascade do |t|
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
-    t.integer  "user_id"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "profile_photo_url"
-  end
-
-  add_index "parents", ["user_id"], name: "index_parents_on_user_id", unique: true, using: :btree
+  add_index "messages", ["conversation_id"], name: "index_messages_on_conversation_id", using: :btree
 
   create_table "schedules", force: :cascade do |t|
     t.string   "topic",      null: false
@@ -178,7 +188,8 @@ ActiveRecord::Schema.define(version: 20161121074714) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  add_foreign_key "parents", "users"
+  add_foreign_key "guardians", "users"
+  add_foreign_key "conversations", "conversations"
   add_foreign_key "schedules", "courses"
   add_foreign_key "students", "users"
   add_foreign_key "teachers", "users"

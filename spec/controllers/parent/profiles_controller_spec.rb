@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Parent::ProfilesController, type: :controller do
+RSpec.describe Guardian::ProfilesController, type: :controller do
 
   describe "GET #edit" do
     it "returns http success" do

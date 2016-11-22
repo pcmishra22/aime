@@ -42,7 +42,7 @@ class Student::ProfilesController < Student::AppController
   	@student = @current_student
   	if(@student.update(student_params))
   		redirect_to student_profile_path(current_student) , :notice=>'Profile Successfully Updated.'
-  	else 
+  	else
   		render :edit
   	end
   end
