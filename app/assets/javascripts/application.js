@@ -12,12 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap-datepicker
 //= require turbolinks
 //= require bootstrap-sprockets
+//= require bootstrap-datepicker
 //= require_tree .
-
-$(function (){
-	$('.dateField').datepicker({ dateFormat: 'D, yy M dd',startDate: new Date(),format: 'yyyy-mm-dd' });
-	$('.dob-profile').datepicker({ dateFormat: 'D, yy M dd',format: 'yyyy-mm-dd' });
-});

@@ -1,27 +1,50 @@
 .col-lg-6
-	= simple_form_for [:teacher, @course,  @schedule]  do |f|
-		= f.error_notification
-		.form-group
-			.form-inputs
-				=f.input :topic,:label=>"Topic",:placeholder=>"Schedule Topic",input_html:{:class=>'form-control'}
-		.form-group
-			.form-inputs.form-inline
-				= f.label :startdate,"Start Date"
-				= f.input :startdate, :placeholder => "YYYY-MM-DD", :input_html => {:class => "form-control dateField datepicker date-picker"}, :label => false,as: :string
-		.form-group
-			.form-inputs.form-inline
-				= f.label :enddate,"End Date"
-				= f.input :enddate, :placeholder => "YYYY-MM-DD", :input_html => {:class => "form-control dateField datepicker date-picker"}, :label => false,as: :string
-		.form-group
-			.form-inputs.form-inline
-				= f.label :starttime,"Course Start Time"
-				= f.input :starttime, :input_html => {:class => "form-control"}, :label => false,as: :time
+  = simple_form_for [:teacher, @course,  @schedule]  do |f|
+    = f.error_notification
+    .form-group
+      .form-inputs
+        =f.input :topic,:label=>"Topic",:placeholder=>"Schedule Topic",input_html:{:class=>'form-control'}
+    .form-group
+      .form-inputs.form-inline
+        = f.label :startdate,"Start Date"
+        = f.input :startdate, :placeholder => "YYYY-MM-DD", :input_html => {:class => "form-control dateField datepicker date-picker", id: 'from_date'}, :label => false,as: :string
+    .form-group
+      .form-inputs.form-inline
+        = f.label :enddate,"End Date"
+        = f.input :enddate, :placeholder => "YYYY-MM-DD", :input_html => {:class => "form-control dateField datepicker date-picker", id: 'to_date'}, :label => false,as: :string
+    .form-group
+      .form-inputs.form-inline
+        = f.label :starttime,"Course Start Time"
+        = f.input :starttime, :input_html => {:class => "form-control"}, :label => false,as: :time
 
-		.form-group
-			.form-inputs.form-inline
-				= f.label :endtime,"Course End Time"
-				= f.input :endtime, :input_html => {:class => "form-control"}, :label => false,as: :time
+    .form-group
+      .form-inputs.form-inline
+        = f.label :endtime,"Course End Time"
+        = f.input :endtime, :input_html => {:class => "form-control"}, :label => false,as: :time
 
-		.form-actions.profile-input
-			= f.button :submit, "Submit",:class=>'btn btn-primary'
-			= link_to "Cancel" ,teacher_course_schedules_path,:class=>'btn btn-primary'
+    .form-actions.profile-input
+      = f.button :submit, "Submit",:class=>'btn btn-primary'
+      = link_to "Cancel" ,teacher_course_schedules_path,:class=>'btn btn-primary'
+
+= content_for :custom_javascripts do
+  :javascript
+    $(document).ready(function () {
+      alert("here");
+      $('#to_date').datepicker({
+        changeMonth: true,
+        changeYear: true,
+        yearRange: '2016:+20',
+        dateFormat: 'yy-mm-dd'
+      });
+
+      $("#from_date").datepicker({
+        changeMonth: true,
+        changeYear: true,
+        yearRange: '2016:+20',
+        dateFormat: 'yy-mm-dd',
+        onSelect: function (dateText, inst) {
+          $("#to_date").datepicker("option", "minDate", $("#from_date").datepicker("getDate"));
+        }
+      });
+
+    });
