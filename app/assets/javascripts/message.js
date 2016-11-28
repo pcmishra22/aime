@@ -43,6 +43,11 @@ function getLastMessageId(){
     return getSelectedConversationElement().attr('last-id');
 }
 
+function scrollMessageDivToBottom(){
+    var d = $('.display-message');
+    d.scrollTop(d.prop("scrollHeight"));
+}
+
 function setLastMessageId(id){
     getSelectedConversationElement().attr('last-id', id);
 }
@@ -55,6 +60,7 @@ function postMessage() {
             // make message input box blank
             $('#message').val('');
             setLastMessageId(data.id)
+            scrollMessageDivToBottom();
         });
 }
 
@@ -77,10 +83,12 @@ function loadMessage(lastMessageId){
             last_id = thread.id
         });
 
+
+
         if(last_id){
             setLastMessageId(last_id);
         }
-
+        scrollMessageDivToBottom();
 
     });
 }
