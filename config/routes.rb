@@ -25,7 +25,10 @@ Rails.application.routes.draw do
   namespace :student do
     resource :dashboard
     resource :profile
-    resources :conversations
+    resources :conversations do
+      resources :messages
+    end
+
 
   end
   

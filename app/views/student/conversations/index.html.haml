@@ -1,9 +1,22 @@
 %section#mu-gallery
   .container
-    .row
-      .col-md-3
-        %ul
+    .message-body
+      .message-left
+        %ul#user-list
           - @conversations.each do |conversation|
-            %li= conversation.last_message_text
-      .col-md-9
-        %p message thread
+            %a.user-link{href:'#', 'data-id' => "#{conversation.id}"}
+              %li.test
+                %img{src: "#{image_path('default_profile.png')}"}
+                #{conversation.other_user(current_student).first_name}
+      .message-right
+        .display-message
+        .send-message
+          = form_tag student_conversation_messages_path(1), {id:'mform'} do
+            = hidden_field_tag :conversation_id, ''
+            .form-group
+              %textarea#message.form-control{placeholder:"Enter Your Message", name: 'message_text'}
+            %button#reply.btn.btn-primary{type: 'button'} Reply
+            %span#error
+
+- content_for :custom_javascripts do
+  =javascript_include_tag 'message'

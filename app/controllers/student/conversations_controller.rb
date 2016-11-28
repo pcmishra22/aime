@@ -6,4 +6,5 @@ class Student::ConversationsController < Student::AppController
     @conversations = current_student.conversations
   end
 
+
 end
