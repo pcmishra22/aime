@@ -1,17 +1,17 @@
 class Guardian::ProfilesController < Guardian::AppController
   layout 'parent'
 
-  skip_before_action :authorize_parent!, only: [:new, :create]
+  skip_before_action :authorize_guardian!, only: [:new, :create]
 
   def index
-    render json: current_user.parent
+    render json: current_user.guardian
     return
   end
 
   def new
 
     # Student has already their profile created
-    redirect_to edit_parent_profile_path if current_parent
+    redirect_to edit_guardian_profile_path if current_guardian
 
     @parent = Guardian.new
   end
@@ -33,14 +33,14 @@ class Guardian::ProfilesController < Guardian::AppController
   end
 
   def edit
-    @parent = current_parent
+    @parent = current_guardian
     @courses = {1=>"Science",2=>"Math"}
   end
 
   def update
-    @parent = current_parent
+    @parent = current_guardian
     if(@parent.update(parent_params))
-      redirect_to parent_profile_path(current_parent) , :notice=>'Profile Successfully Updated.'
+      redirect_to parent_profile_path(current_guardian) , :notice=>'Profile Successfully Updated.'
     else
       render :edit
     end

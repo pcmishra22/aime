@@ -3,16 +3,16 @@ class Teacher < ActiveRecord::Base
 	has_many :courses
 
 
-	def received_messages
-		Conversation.where("recipient_id = ? AND recipient_type  = ?", self.id, 2)
+	def received_conversations
+		Conversation.where("recipient_id = ? AND recipient_type  = ?", self.id, Conversation.recipient_types[:RECIPIENT_TEACHER])
 	end
 
-	def sent_messages
-		Conversation.where("sender_id = ? AND sender_type  = ?", self.id, 3)
+	def sent_conversations
+		Conversation.where("sender_id = ? AND sender_type  = ?", self.id, Conversation.sender_types[:SENDER_TEACHER])
 	end
 
-	def messages
-		Conversation.where("(sender_id = ? AND sender_type  = ?) OR (recipient_id = ? AND recipient_type  = ?)", self.id, 3, self.id, 3)
+	def conversations
+		Conversation.where("(sender_id = ? AND sender_type  = ?) OR (recipient_id = ? AND recipient_type  = ?)", self.id, Conversation.sender_types[:SENDER_TEACHER], self.id, Conversation.recipient_types[:RECIPIENT_TEACHER])
 	end
 
 end

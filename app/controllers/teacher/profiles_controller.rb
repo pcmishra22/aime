@@ -1,5 +1,4 @@
 class Teacher::ProfilesController < Teacher::AppController
-  layout 'teacher'
   skip_before_action :authorize_teacher!, only: [:new, :create]
 
   def index

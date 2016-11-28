@@ -1,4 +1,4 @@
-class Student::ConversationsController < Student::AppController
+class Guardian::ConversationsController < Guardian::AppController
   before_action :set_user, only: [:index]
   include Conversationer
 
@@ -6,6 +6,6 @@ class Student::ConversationsController < Student::AppController
 
   private
   def set_user
-    @user = current_student
+    @user = current_guardian
   end
 end

@@ -1,16 +1,16 @@
 class Guardian < ActiveRecord::Base
 	belongs_to :user
 
-	def received_messages
-		Conversation.where("recipient_id = ? AND recipient_type  = ?", self.id, 3)
+	def received_conversations
+		Conversation.where("recipient_id = ? AND recipient_type  = ?", self.id, Conversation.recipient_types[:RECIPIENT_GUARDIAN])
 	end
 
-	def sent_messages
-		Conversation.where("sender_id = ? AND sender_type  = ?", self.id, 3)
+	def sent_conversations
+		Conversation.where("sender_id = ? AND sender_type  = ?", self.id, Conversation.sender_types[:SENDER_GUARDIAN])
 	end
 
-	def messages
-		Conversation.where("(sender_id = ? AND sender_type  = ?) OR (recipient_id = ? AND recipient_type  = ?)", self.id, 1, self.id, 3)
+	def conversations
+		Conversation.where("(sender_id = ? AND sender_type  = ?) OR (recipient_id = ? AND recipient_type  = ?)", self.id, Conversation.sender_types[:SENDER_GUARDIAN], self.id, Conversation.recipient_types[:RECIPIENT_GUARDIAN])
 	end
 
 end
