@@ -1,5 +1,4 @@
 class Guardian::ProfilesController < Guardian::AppController
-  layout 'parent'
 
   skip_before_action :authorize_guardian!, only: [:new, :create]
 
@@ -23,7 +22,7 @@ class Guardian::ProfilesController < Guardian::AppController
 
     respond_to do |format|
       if @parent.save
-        format.html { redirect_to parent_profile_path, notice: 'Your guardian profile created successfully' }
+        format.html { redirect_to guardian_profile_path, notice: 'Your guardian profile created successfully' }
         format.json { render :show, status: :created, location: @parent }
       else
         format.html { render :new }
@@ -40,7 +39,7 @@ class Guardian::ProfilesController < Guardian::AppController
   def update
     @parent = current_guardian
     if(@parent.update(parent_params))
-      redirect_to parent_profile_path(current_guardian) , :notice=>'Profile Successfully Updated.'
+      redirect_to guardian_profile_path(current_guardian) , :notice=>'Profile Successfully Updated.'
     else
       render :edit
     end
