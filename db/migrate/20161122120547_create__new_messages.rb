@@ -8,8 +8,8 @@ class CreateNewMessages < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_reference :messages, :conversation, references: :conversations, index: true
-    add_foreign_key :conversations, :conversations
+    #add_reference :messages, :conversation, references: :conversations, index: true
+    #add_foreign_key :conversations, :conversations
 
   end
 end
