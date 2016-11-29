@@ -106,7 +106,7 @@ function messageJsonToHtml(jsonObj){
      + "        <img src='http://fze.uni-trier.de/wp-content/themes/weta/images/useravatar.png'>"
      + "    </div>"
      + "    <div class='text-con'>"
-     + "        <a href='#''>User Name</a>"
+     + "        <a href='#''>" + jsonObj.user.first_name + "</a>"
      + "        <p>" + jsonObj.message + "</p>"
      + "    </div>"
      + "</div>"

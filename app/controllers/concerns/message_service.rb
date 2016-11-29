@@ -9,7 +9,9 @@ module MessageService
 
 
   def index
-    @messages = params[:after].present? ? @conversation.messages.created_after_id(params[:after]) : @conversation.messages
+    @messages = params[:after].present? ?
+        @conversation.messages.created_after_id(params[:after]).as_json(include: {user:{only: [:first_name, :last_name]} }) :
+        @conversation.messages.as_json(include: {user:{only: [:first_name, :last_name]} })
     respond_to do |format|
       format.html
       format.json { render json: @messages}
