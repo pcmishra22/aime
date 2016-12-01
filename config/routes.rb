@@ -2,15 +2,8 @@ Rails.application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  get 'pages/about'
 
-  get 'pages/aimesays'
-
-  get 'pages/careers'
-
-  get 'pages/contact'
-
-  get 'pages/videos'
+  get 'pages*' => 'pages#*', :format => false
 
   root to: 'visitors#index'
 
