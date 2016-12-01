@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
-  get 'pages*' => 'pages#*', :format => false
 
   root to: 'visitors#index'
 
@@ -47,5 +46,8 @@ Rails.application.routes.draw do
       resources :messages
     end
   end
+
+  get 'pages*' => 'pages#*', :format => false
+
 
 end
